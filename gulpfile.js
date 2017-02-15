@@ -10,7 +10,7 @@ const {
   constants: {
     CODEPUSH_RELEASE_DIR,
   },
-} = require('./gulp-helpers/codepush/helpers');
+} = require('./gulp-helpers/codepush');
 
 /**
  * CodePush tasks
