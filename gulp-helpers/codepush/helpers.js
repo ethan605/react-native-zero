@@ -12,6 +12,7 @@ const fs = require('fs');
 const lodash = require('lodash');
 const yargs = require('yargs');
 
+// Output commands to be executed via "--dry" flag
 const DRY_RUN = !!yargs.argv.dry;
 
 const CODEPUSH_CONFIGS_FILE = './gulp-helpers/codepush/configs.json';
