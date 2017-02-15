@@ -1,20 +1,43 @@
 {
-	"name": "ZeroProj",
-	"version": "0.0.1",
-	"private": true,
+	"name": "react-native-zero",
+	"version": "1.0.0",
+	"private": false,
 	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
+		"start": "react-native start",
+		"test": "jest",
+		"lint": "eslint app/",
+		"android-debug": "react-native run-android --variant productionDebug",
+		"android-staging": "react-native run-android --variant stagingRelease",
+		"android-release": "react-native run-android --variant productionRelease",
+		"ios-debug": "react-native run-ios --configuration Debug --scheme ZeroProj",
+		"ios-staging": "react-native run-ios --configuration Staging --scheme 'ZeroProj Staging'",
+		"ios-release": "react-native run-ios --configuration Release --scheme 'ZeroProj Release'",
+		"codepush-check": "code-push deployment history ZeroProj",
+		"codepush-release": "gulp codepush:release"
 	},
 	"dependencies": {
 		"react": "~15.4.0",
 		"react-native": "0.41.2"
 	},
 	"devDependencies": {
+		"babel-core": "^6.23.1",
+		"babel-eslint": "^7.1.1",
 		"babel-jest": "18.0.0",
+		"babel-preset-es2015": "^6.22.0",
 		"babel-preset-react-native": "1.9.1",
+		"code-push-cli": "^1.12.6-beta",
+		"eslint": "^3.15.0",
+		"eslint-plugin-import": "^2.2.0",
+		"eslint-plugin-react": "^6.9.0",
+		"eslint-plugin-react-native": "^2.2.1",
+		"gulp": "^3.9.1",
+		"gulp-clean": "^0.3.2",
+		"gulp-sequence": "^0.4.6",
+		"gulp-shell": "^0.5.2",
 		"jest": "18.1.0",
-		"react-test-renderer": "~15.4.0"
+		"react-native-cli": "^2.0.1",
+		"react-test-renderer": "~15.4.0",
+		"yargs": "^6.6.0"
 	},
 	"jest": {
 		"preset": "react-native"
