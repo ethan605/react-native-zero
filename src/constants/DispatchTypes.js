@@ -1,0 +1,16 @@
+/**
+ * @providesModule ZeroProj.Constants.DispatchTypes
+ */
+
+export default {
+  // Commons
+  LOADING_PROGRESS_CHANGED          : 'LOADING_PROGRESS_CHANGED',
+  REQUEST_REMOTE_RESOURCES          : 'REQUEST_REMOTE_RESOURCES',
+  RESET_COMPONENT_STATES            : 'RESET_COMPONENT_STATES',
+  SHOW_LOADING_SPINNER              : 'SHOW_LOADING_SPINNER',
+  SHOW_REFRESH_CONTROL              : 'SHOW_REFRESH_CONTROL',
+  UPDATE_USER_LOCATION              : 'UPDATE_USER_LOCATION',
+
+  // AppRouter
+  ACCESS_LEVEL_CHANGED              : 'ACCESS_LEVEL_CHANGED',
+};

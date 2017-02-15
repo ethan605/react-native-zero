@@ -5,7 +5,7 @@
 	"scripts": {
 		"start": "react-native start",
 		"test": "jest",
-		"lint": "eslint app/",
+		"lint": "eslint src/",
 		"android-debug": "react-native run-android --variant productionDebug",
 		"android-staging": "react-native run-android --variant stagingRelease",
 		"android-release": "react-native run-android --variant productionRelease",

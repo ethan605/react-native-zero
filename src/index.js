@@ -4,9 +4,18 @@
  */
 
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import CodePush from 'react-native-code-push';
 
-export default class App extends React.Component {
+const CODEPUSH_OPTIONS = {
+  checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
+  installMode: Platform.select({
+    ios: CodePush.InstallMode.IMMEDIATE,
+    android: CodePush.InstallMode.ON_NEXT_RESUME,
+  }),
+};
+
+class App extends React.Component {
   componentDidMount() {
   }
 
@@ -34,3 +43,5 @@ const styles = StyleSheet.create({
     margin: 10,
   },
 });
+
+export default CodePush(CODEPUSH_OPTIONS)(App);
