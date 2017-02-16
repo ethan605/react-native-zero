@@ -1,5 +1,5 @@
 /*
- * @providesModule ZeroProj.Reusables.Logger
+ * @providesModule ZeroProj.Utils.Logger
  */
 
 /* eslint-disable no-console */
@@ -11,7 +11,7 @@ const extractCalleeName = callee => {
   return components.length > 1 ? components[0] : '';
 };
 
-const delegateConsole = (method: string, ...args) => {
+const delegateConsole = (method, ...args) => {
   if (!FEATURES.LOGGER) return;
 
   const callStack = new Error().stack

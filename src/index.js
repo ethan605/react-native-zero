@@ -4,15 +4,23 @@
  */
 
 import React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import CodePush from 'react-native-code-push';
+import { Provider } from 'react-redux';
+
+// Components
+import AppExperimentals from './components/AppExperimentals';
+import AppRouter from './components/AppRouter';
+
+// Constants
+import { FEATURES } from './constants/Flags';
+
+// Redux
+import store from './redux/store';
 
 const CODEPUSH_OPTIONS = {
   checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
-  installMode: Platform.select({
-    ios: CodePush.InstallMode.IMMEDIATE,
-    android: CodePush.InstallMode.ON_NEXT_RESUME,
-  }),
+  installMode: CodePush.InstallMode.IMMEDIATE,
 };
 
 class App extends React.Component {
@@ -20,11 +28,15 @@ class App extends React.Component {
   }
 
   render() {
+    if (FEATURES.APP_EXPERIMENTALS)
+      return <AppExperimentals />;
+
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to ZeroProj!
-        </Text>
+        <StatusBar backgroundColor={'transparent'} translucent barStyle={'light-content'} />
+        <Provider store={store}>
+          <AppRouter />
+        </Provider>
       </View>
     );
   }
@@ -33,14 +45,6 @@ class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
   },
 });
 

@@ -215,7 +215,15 @@
       "error",
       "as-needed"
     ],
-    "id-length": "error",
+    "id-length": [
+      "error",
+      {
+        "exceptions": [
+          "_"
+        ],
+        "properties": "never"
+      }
+    ],
     "camelcase": "error",
     "new-cap": [
       "error",

@@ -1,5 +1,5 @@
 /**
- * @providesModule ZeroProj.Reducers
+ * @providesModule ZeroProj.Redux.Reducers
  */
 
 import { applyMiddleware, combineReducers, createStore } from 'redux';
