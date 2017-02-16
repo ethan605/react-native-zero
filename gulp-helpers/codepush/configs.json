@@ -5,7 +5,7 @@
   "build_target": "debug",
   "deployment_keys": {
     "debug": "not_available",
-    "release": "code_push_release_key-AgG",
-    "staging": "code_push_staging_key-AgG"
+    "release": "code_push_release_key",
+    "staging": "code_push_staging_key"
   }
 }

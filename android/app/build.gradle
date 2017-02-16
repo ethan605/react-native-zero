@@ -97,6 +97,14 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+    signingConfigs {
+        release {
+            storeFile file(ZEROPROJ_RELEASE_STORE_FILE)
+            storePassword keystorePassword
+            keyAlias ZEROPROJ_RELEASE_KEY_ALIAS
+            keyPassword keystorePassword
+        }
+    }
     splits {
         abi {
             reset()
@@ -106,9 +114,21 @@ android {
         }
     }
     buildTypes {
+        debug {
+            applicationIdSuffix ".dev"
+            buildConfigField "String", "CODEPUSH_KEY", '"not_available"'
+            resValue "string", "app_name", "ZeroProj-DEV"
+        }
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            buildConfigField "String", "CODEPUSH_KEY", '"code_push_release_key"'
+            resValue "string", "app_name", "ZeroProj"
+        }
+        releaseStaging {
+            applicationIdSuffix ".stg"
+            buildConfigField "String", "CODEPUSH_KEY", '"code_push_staging_key"'
+            resValue "string", "app_name", "ZeroProj-STG"
         }
     }
     // applicationVariants are e.g. debug, release
