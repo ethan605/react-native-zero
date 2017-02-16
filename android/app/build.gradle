@@ -100,9 +100,9 @@ android {
     signingConfigs {
         release {
             storeFile file(ZEROPROJ_RELEASE_STORE_FILE)
-            storePassword keystorePassword
+            storePassword ZEROPROJ_RELEASE_STORE_PASSWORD
             keyAlias ZEROPROJ_RELEASE_KEY_ALIAS
-            keyPassword keystorePassword
+            keyPassword ZEROPROJ_RELEASE_KEY_PASSWORD
         }
     }
     splits {
@@ -127,6 +127,8 @@ android {
         }
         releaseStaging {
             applicationIdSuffix ".stg"
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             buildConfigField "String", "CODEPUSH_KEY", '"code_push_staging_key"'
             resValue "string", "app_name", "ZeroProj-STG"
         }
