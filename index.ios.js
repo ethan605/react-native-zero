@@ -7,7 +7,7 @@
 import React from 'react';
 /* eslint-enable no-unused-vars */
 import { AppRegistry } from 'react-native';
-import App from './src';
+import App from './app';
 
 export default function ZeroProj() {
   return <App />;

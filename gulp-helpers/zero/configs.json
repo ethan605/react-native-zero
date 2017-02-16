@@ -1,0 +1,12 @@
+{
+  "packageName": "react-native-zero",
+  "providesModule": "ZeroProj",
+  "android": {
+    "package": "com.zeroproj",
+    "applicationId": "com.zeroproj"
+  },
+  "ios": {
+    "bundleId": "com.zeroproj",
+    "productName": "ZeroProj"
+  }
+}

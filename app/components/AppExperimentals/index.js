@@ -7,16 +7,14 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import _ from 'lodash';
 
 // Constants
-import { FEATURES } from 'app/constans/Flags';
+import { FEATURES } from 'app/constants/Flags';
 
 // Utils
-import DeviceUtils from 'app/utils/DeviceUtils';
 import Logger from 'app/utils/Logger';
 
 if (FEATURES.GLOBAL_MODULES) {
   Object.assign(global, {
     _,
-    DeviceUtils,
   });
 }
 

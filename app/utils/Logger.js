@@ -19,9 +19,9 @@ const delegateConsole = (method, ...args) => {
     .slice(3)
     .map(extractCalleeName);
   const logPrefix = `[ZeroProj][${method}] ${callStack[0]}():`;
-  const stackTrace = DEBUGS.PRINT_LOG_STACK ? `[Stack: ${callStack.join(' > ')}]` : '';
+  const stackTrace = DEBUGS.PRINT_LOG_STACK ? [callStack] : [];
 
-  console[method](logPrefix, ...args, stackTrace);
+  console[method](logPrefix, ...args, ...stackTrace);
 };
 
 export default {

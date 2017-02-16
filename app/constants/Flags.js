@@ -11,7 +11,7 @@ export const DEBUGS = {
 };
 
 export const FEATURES = {
-  APP_EXPERIMENTALS:          true,
+  APP_EXPERIMENTALS:          false,
   GLOBAL_MODULES:             true,
   LOGGER:                     true,
 };
