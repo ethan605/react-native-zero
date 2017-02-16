@@ -9,9 +9,9 @@
 		"android-debug": "react-native run-android --variant productionDebug",
 		"android-staging": "react-native run-android --variant stagingRelease",
 		"android-release": "react-native run-android --variant productionRelease",
-		"ios-debug": "react-native run-ios --configuration Debug --scheme ZeroProj",
-		"ios-staging": "react-native run-ios --configuration Staging --scheme 'ZeroProj Staging'",
-		"ios-release": "react-native run-ios --configuration Release --scheme 'ZeroProj Release'",
+		"ios-debug": "react-native run-ios --configuration Debug",
+		"ios-staging": "echo 'Run from Xcode instead'",
+		"ios-release": "react-native run-ios --configuration Release",
 		"codepush-check": "code-push deployment history ZeroProj",
 		"codepush-release": "gulp codepush:release"
 	},
