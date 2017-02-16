@@ -1,6 +1,6 @@
 {
   "packageName": "react-native-zero",
-  "providesModule": "ZeroProj",
+  "moduleName": "ZeroProj",
   "android": {
     "package": "com.zeroproj",
     "applicationId": "com.zeroproj"

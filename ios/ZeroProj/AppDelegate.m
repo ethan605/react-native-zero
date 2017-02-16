@@ -12,11 +12,20 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
+#import <CodePush/CodePush.h>
+
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   NSURL *jsCodeLocation;
+  
+#ifdef DEBUG
+  jsCodeLocation = [[RCTBundleURLProvider sharedSettings]
+                    jsBundleURLForBundleRoot:@"index.ios"
+                    fallbackResource:nil];
+#else
+  jsCodeLocation = [CodePush bundleURL];
+#endif
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
