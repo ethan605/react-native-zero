@@ -17,7 +17,6 @@ const fs = require('fs');
 // const DRY_RUN = !!yargs.argv.dry;
 
 const ZERO_CONFIGS_FILE = './gulp-helpers/zero/configs.json';
-const NAMES_MAPPER_FILE = './gulp-helpers/zero/names_mapper.json';
 
 function readConfigs(platform) {
   const configs = fs.readFileSync(ZERO_CONFIGS_FILE);
@@ -48,27 +47,10 @@ function readConfigs(platform) {
   };
 }
 
-function readNamesMapper(platform) {
-  const namesMapper = fs.readFileSync(NAMES_MAPPER_FILE);
-  const {
-    [platform]: {
-      fileContents = [],
-      fileNames = [],
-    },
-  } = JSON.parse(namesMapper);
-
-  return {
-    fileContents,
-    fileNames,
-  };
-}
-
 module.exports = {
   readConfigs,
-  readNamesMapper,
   constants: {
     ZERO_CONFIGS_FILE,
-    NAMES_MAPPER_FILE,
   },
 };
 

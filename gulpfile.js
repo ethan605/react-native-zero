@@ -1,6 +1,7 @@
 // Gulp modules
 const gulp = require('gulp');
 const clean = require('gulp-clean');
+const rename = require('gulp-rename');
 const replace = require('gulp-replace');
 const sequence = require('gulp-sequence');
 
@@ -49,27 +50,49 @@ gulp.task('exp', () => {
   // zero.readNamesMapper('ios');
 });
 
-gulp.task('zero:setup:clean', () => gulp.src('cloned').pipe(clean()));
+gulp.task('zero:setup:clean', () => (
+  gulp.src(['android_cloned', 'ios_cloned'])
+    .pipe(clean()))
+);
 
-gulp.task('zero:setup:prepare', () => (
-  ['android', 'ios'].forEach(platform => (
-    gulp.src(`./${platform}/**`)
-      .pipe(gulp.dest(`cloned/${platform}`))
-  ))
-));
+gulp.task('zero:setup:general', () => {
+
+});
 
 gulp.task('zero:setup:ios', () => {
-  // const { packageName } = zero.readConfigs('ios');
-  const { fileContents } = zero.readNamesMapper('ios');
-  gulp.src(fileContents)
-    .pipe(replace('ZeroProj', 'ZeroApp'))
-    .pipe(gulp.dest('cloned/ios'));
+  const platform = 'ios';
+  const { moduleName, appId } = zero.readConfigs(platform);
+  const nameReplacement = ['ZeroProj', moduleName];
+
+  gulp.src(`./${platform}/**`)
+    .pipe(replace(...nameReplacement))
+    .pipe(replace('com.zeroproj', appId))
+    .pipe(rename(path => {
+      path.dirname = path.dirname.replace(...nameReplacement);
+      path.basename = path.basename.replace(...nameReplacement);
+    }))
+    .pipe(gulp.dest(`./${platform}_cloned`));
+});
+
+gulp.task('zero:setup:android', () => {
+  const platform = 'android';
+  const { moduleName, appId } = zero.readConfigs(platform);
+  const nameReplacement = ['ZeroProj', moduleName];
+
+  gulp.src(`./${platform}/**`)
+    .pipe(replace(...nameReplacement))
+    .pipe(replace('com.zeroproj', appId))
+    .pipe(rename(path => {
+      path.dirname = path.dirname.replace(...nameReplacement);
+      path.basename = path.basename.replace(...nameReplacement);
+    }))
+    .pipe(gulp.dest(`./${platform}_cloned`));
 });
 
 gulp.task('zero:setup', sequence(
   'zero:setup:clean',
-  'zero:setup:prepare',
   [
-    'zero:setup:ios',
+    // 'zero:setup:android',
+    // 'zero:setup:ios',
   ]
 ));
