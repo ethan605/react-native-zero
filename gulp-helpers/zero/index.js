@@ -137,7 +137,7 @@ gulp.task('zero:setup:copy-new', () => (
 ));
 
 gulp.task('zero:setup', sequence(
-  CLONE_RUN ? undefined : 'zero:bak',
+  CLONE_RUN ? undefined : 'zero:backup',
   'zero:setup:cleanup',
   'zero:setup:prepare',
   [
