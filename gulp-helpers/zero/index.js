@@ -54,14 +54,22 @@ function readConfigs(platform) {
   };
 }
 
-gulp.task('zero:setup:clean', () => (
-  gulp.src(['android.clone', 'ios.clone']).pipe(clean())
+gulp.task('zero:backup', () => (
+  ['android', 'ios'].forEach(platform => (
+    gulp.src(`./${platform}/**`)
+      .pipe(gulp.dest(`./bak/${platform}`))
+  ))
+));
+
+gulp.task('zero:setup:cleanup', () => (
+  gulp.src('clone').pipe(clean())
 ));
 
 gulp.task('zero:setup:prepare', () => (
-  CLONE_RUN
-    ? gulp.src('./android/**').pipe(gulp.dest('./android.clone'))
-    : null
+  gulp.src([
+    './android/**',
+    '!./android/**/zeroproj-release-key.keystore',
+  ]).pipe(gulp.dest('./clone/android'))
 ));
 
 gulp.task('zero:setup:general', () => {
@@ -82,11 +90,9 @@ gulp.task('zero:setup:android', () => {
     },
   } = readConfigs('android');
 
-  const outDir = `./android${CLONE_RUN ? '.clone' : ''}`;
-
   gulp.src('./android/**/zeroproj-release-key.keystore')
     .pipe(rename((path => path.basename = keyStoreFileName)))
-    .pipe(gulp.dest(outDir));
+    .pipe(gulp.dest('./clone/android'));
 
   gulp.src('./android/**/build.gradle')
     .pipe(replace('ZeroProj', moduleName))
@@ -97,7 +103,7 @@ gulp.task('zero:setup:android', () => {
     .pipe(replace('ZEROPROJ_RELEASE_KEY_PASSWORD', keyPassword))
     .pipe(replace('code_push_release_key', codepushReleaseKey))
     .pipe(replace('code_push_staging_key', codepushStagingKey))
-    .pipe(gulp.dest(outDir));
+    .pipe(gulp.dest('./clone/android'));
 });
 
 gulp.task('zero:setup:ios', () => {
@@ -109,8 +115,6 @@ gulp.task('zero:setup:ios', () => {
   } = readConfigs('ios');
   const moduleNameReplacement = ['ZeroProj', moduleName];
 
-  const outDir = `./ios${CLONE_RUN ? '.clone' : ''}`;
-
   gulp.src('./ios/**')
     .pipe(replace(...moduleNameReplacement))
     .pipe(replace('com.zeroproj', appId))
@@ -120,16 +124,27 @@ gulp.task('zero:setup:ios', () => {
       path.dirname = path.dirname.replace(...moduleNameReplacement);
       path.basename = path.basename.replace(...moduleNameReplacement);
     }))
-    .pipe(gulp.dest(outDir));
+    .pipe(gulp.dest('./clone/ios/'));
 });
 
+gulp.task('zero:setup:remove-old', () => (
+  gulp.src(['./android', './ios']).pipe(clean())
+));
+
+gulp.task('zero:setup:copy-new', () => (
+  gulp.src('./clone/**').pipe(gulp.dest('.'))
+));
+
 gulp.task('zero:setup', sequence(
-  'zero:setup:clean',
+  'zero:setup:cleanup',
   'zero:setup:prepare',
   [
     'zero:setup:android',
     'zero:setup:ios',
-  ]
+  ],
+  'zero:setup:remove-old',
+  'zero:setup:copy-new',
+  'zero:setup:cleanup',
 ));
 
 /* eslint-enable no-console */
