@@ -1,6 +1,6 @@
 // Gulp modules
 import gulp from 'gulp';
-// import clean from 'gulp-clean';
+import clean from 'gulp-clean';
 // import debug from 'gulp-debug';
 import rename from 'gulp-rename';
 import replace from 'gulp-replace';
@@ -51,8 +51,10 @@ gulp.task('exp', () => {
   // zero.readNamesMapper('ios');
 });
 
+gulp.task('zero:setup:clean', () => gulp.src(['android.test', 'ios.test']).pipe(clean()));
+
 gulp.task('zero:setup:prepare', () => (
-  gulp.src('./android/**').pipe(gulp.dest('./android_cloned'))
+  gulp.src('./android/**').pipe(gulp.dest('./android.test'))
 ));
 
 gulp.task('zero:setup:general', () => {
@@ -65,6 +67,7 @@ gulp.task('zero:setup:android', () => {
     codepushReleaseKey,
     codepushStagingKey,
     moduleName,
+    keyStoreFileName,
     signingConfigs: {
       storeFile,
       storePassword,
@@ -72,6 +75,10 @@ gulp.task('zero:setup:android', () => {
       keyPassword,
     },
   } = zero.readConfigs('android');
+
+  gulp.src('./android/**/zeroproj-release-key.keystore')
+    .pipe(rename((path => path.basename = keyStoreFileName)))
+    .pipe(gulp.dest('./android.test'));
 
   gulp.src('./android/**/build.gradle')
     .pipe(replace('ZeroProj', moduleName))
@@ -82,7 +89,7 @@ gulp.task('zero:setup:android', () => {
     .pipe(replace('ZEROPROJ_RELEASE_KEY_PASSWORD', keyPassword))
     .pipe(replace('code_push_release_key', codepushReleaseKey))
     .pipe(replace('code_push_staging_key', codepushStagingKey))
-    .pipe(gulp.dest('./android_cloned'));
+    .pipe(gulp.dest('./android.test'));
 });
 
 gulp.task('zero:setup:ios', () => {
@@ -103,13 +110,14 @@ gulp.task('zero:setup:ios', () => {
       path.dirname = path.dirname.replace(...moduleNameReplacement);
       path.basename = path.basename.replace(...moduleNameReplacement);
     }))
-    .pipe(gulp.dest('./ios_clone'));
+    .pipe(gulp.dest('./ios.test'));
 });
 
 gulp.task('zero:setup', sequence(
+  'zero:setup:clean',
   'zero:setup:prepare',
   [
     'zero:setup:android',
-    // 'zero:setup:ios',
+    'zero:setup:ios',
   ]
 ));
