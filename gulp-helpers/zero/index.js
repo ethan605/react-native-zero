@@ -20,10 +20,10 @@ import yargs from 'yargs';
 // Output commands to be executed via "--clone" flag
 const CLONE_RUN = !!yargs.argv.clone;
 
-const ZERO_CONFIGS_FILE = './gulp-helpers/zero/configs.json';
+const CONFIGS_FILE = './gulp-helpers/zero/configs.json';
 
 function readConfigs(platform) {
-  const configs = fs.readFileSync(ZERO_CONFIGS_FILE);
+  const configs = fs.readFileSync(CONFIGS_FILE);
 
   const {
     moduleName,
