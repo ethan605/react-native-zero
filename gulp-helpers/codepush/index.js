@@ -1,6 +1,7 @@
 /**
  * CodePush helpers
  */
+
 /* eslint-disable no-console */
 
 // Gulp modules
@@ -27,8 +28,8 @@ const CODEPUSH_ENTRY_FILE = {
 };
 
 function readConfigs() {
-  const content = fs.readFileSync(CODEPUSH_CONFIGS_FILE);
-  const { appName, buildNumber, deploymentName, versionName } = JSON.parse(content);
+  const configs = fs.readFileSync(CODEPUSH_CONFIGS_FILE);
+  const { appName, buildNumber, deploymentName, versionName } = JSON.parse(configs);
 
   console.assert(
     parseInt(buildNumber) > 0,

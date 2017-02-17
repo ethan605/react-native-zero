@@ -36,6 +36,7 @@
 		"eslint-plugin-react-native": "^2.2.1",
 		"gulp": "^3.9.1",
 		"gulp-clean": "^0.3.2",
+		"gulp-replace": "^0.5.4",
 		"gulp-sequence": "^0.4.6",
 		"gulp-shell": "^0.5.2",
 		"jest": "18.1.0",

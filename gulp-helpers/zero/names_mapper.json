@@ -1,23 +1,25 @@
 {
   "ios": {
     "fileContents": [
-      "./ios/ZeroProj/Base.lproj/LaunchScreen.xib",
-      "./ios/ZeroProj/AppDelegate.m",
-      "./ios/ZeroProj/Info.plist",
-      "./ios/ZeroProj.xcodeproj/xcshareddata/xcschemes/ZeroProj.xcscheme",
-      "./ios/ZeroProj/project.pbxproj"
+      "ios/ZeroProj/Base.lproj/LaunchScreen.xib",
+      "ios/ZeroProj/AppDelegate.m",
+      "ios/ZeroProj/Info.plist",
+      "ios/ZeroProj.xcodeproj/xcshareddata/xcschemes/ZeroProj.xcscheme",
+      "ios/ZeroProj.xcodeproj/xcshareddata/xcschemes/ZeroProj-Staging.xcscheme",
+      "ios/ZeroProj/project.pbxproj"
     ],
     "fileNames": [
-      "./ios/ZeroProj.xcodeproj/xcshareddata/xcschemes/ZeroProj.xcscheme",
-      "./ios/ZeroProj.xcodeproj",
-      "./ios/ZeroProj"
+      "ios/ZeroProj.xcodeproj/xcshareddata/xcschemes/ZeroProj.xcscheme",
+      "ios/ZeroProj.xcodeproj/xcshareddata/xcschemes/ZeroProj-Staging.xcscheme",
+      "ios/ZeroProj.xcodeproj",
+      "ios/ZeroProj"
     ]
   },
   "android": {
     "fileContents": [
-      "./android/app/src/main/java/com/app/MainActivity.java",
-      "./android/app/build.gradle",
-      "./android/settings.gradle"
+      "android/app/src/main/java/com/app/MainActivity.java",
+      "android/app/build.gradle",
+      "android/settings.gradle"
     ]
   }
 }

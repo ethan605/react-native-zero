@@ -6,11 +6,9 @@
     "staging": "code_push_staging_key"
   },
   "android": {
-    "applicationId": "com.zeroproj",
-    "appName": "ZeroProj"
+    "applicationId": "com.zeroproj"
   },
   "ios": {
-    "bundleId": "com.zeroproj",
-    "productName": "ZeroProj"
+    "bundleId": "com.zeroproj"
   }
 }
