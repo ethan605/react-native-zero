@@ -18,6 +18,7 @@ import fs from 'fs';
 import yargs from 'yargs';
 
 // Clone output files & folders via "--clone" flag
+const CLONE_DIR = './cloned';
 const CLONE_RUN = !!yargs.argv.clone;
 
 const CONFIGS_FILE = './gulp-helpers/zero/configs.json';
@@ -62,14 +63,14 @@ gulp.task('zero:backup', () => (
 ));
 
 gulp.task('zero:setup:cleanup', () => (
-  gulp.src('clone').pipe(clean())
+  gulp.src(CLONE_DIR).pipe(clean())
 ));
 
 gulp.task('zero:setup:prepare', () => (
   gulp.src([
     './android/**',
     '!./android/**/zeroproj-release-key.keystore',
-  ]).pipe(gulp.dest('./clone/android'))
+  ]).pipe(gulp.dest(`./${CLONE_DIR}/android`))
 ));
 
 gulp.task('zero:setup:general', () => {
@@ -92,7 +93,7 @@ gulp.task('zero:setup:android', () => {
 
   gulp.src('./android/**/zeroproj-release-key.keystore')
     .pipe(rename((path => path.basename = keyStoreFileName)))
-    .pipe(gulp.dest('./clone/android'));
+    .pipe(gulp.dest(`./${CLONE_DIR}/android`));
 
   gulp.src('./android/**/build.gradle')
     .pipe(replace('ZeroProj', moduleName))
@@ -103,7 +104,7 @@ gulp.task('zero:setup:android', () => {
     .pipe(replace('ZEROPROJ_RELEASE_KEY_PASSWORD', keyPassword))
     .pipe(replace('code_push_release_key', codepushReleaseKey))
     .pipe(replace('code_push_staging_key', codepushStagingKey))
-    .pipe(gulp.dest('./clone/android'));
+    .pipe(gulp.dest(`./${CLONE_DIR}/android`));
 });
 
 gulp.task('zero:setup:ios', () => {
@@ -124,7 +125,7 @@ gulp.task('zero:setup:ios', () => {
       path.dirname = path.dirname.replace(...moduleNameReplacement);
       path.basename = path.basename.replace(...moduleNameReplacement);
     }))
-    .pipe(gulp.dest('./clone/ios/'));
+    .pipe(gulp.dest(`./${CLONE_DIR}/ios/`));
 });
 
 gulp.task('zero:setup:remove-old', () => (
@@ -132,10 +133,11 @@ gulp.task('zero:setup:remove-old', () => (
 ));
 
 gulp.task('zero:setup:copy-new', () => (
-  gulp.src('./clone/**').pipe(gulp.dest('.'))
+  gulp.src(`./${CLONE_DIR}/**`).pipe(gulp.dest('.'))
 ));
 
 gulp.task('zero:setup', sequence(
+  CLONE_RUN ? undefined : 'zero:bak',
   'zero:setup:cleanup',
   'zero:setup:prepare',
   [
