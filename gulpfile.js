@@ -51,7 +51,7 @@ gulp.task('exp', () => {
 });
 
 gulp.task('zero:setup:clean', () => (
-  gulp.src(['android_cloned', 'ios_cloned'])
+  gulp.src(['android', 'ios'].map(platform => `${platform}_cloned`))
     .pipe(clean()))
 );
 
@@ -59,24 +59,26 @@ gulp.task('zero:setup:general', () => {
 
 });
 
-gulp.task('zero:setup:ios', () => {
-  const platform = 'ios';
-  const { moduleName, appId } = zero.readConfigs(platform);
-  const nameReplacement = ['ZeroProj', moduleName];
+gulp.task('zero:setup:platforms', () => (
+  ['android', 'ios'].forEach(platform => {
+    const { moduleName, appId } = zero.readConfigs(platform);
+    const nameReplacement = ['ZeroProj', moduleName];
 
-  gulp.src(`./${platform}/**`)
-    .pipe(replace(...nameReplacement))
-    .pipe(replace('com.zeroproj', appId))
-    .pipe(rename(path => {
-      path.dirname = path.dirname.replace(...nameReplacement);
-      path.basename = path.basename.replace(...nameReplacement);
-    }))
-    .pipe(gulp.dest(`./${platform}_cloned`));
-});
+    gulp.src(`./${platform}/**`)
+      .pipe(replace(...nameReplacement))
+      .pipe(replace('com.zeroproj', appId))
+      .pipe(rename(path => {
+        path.dirname = path.dirname.replace(...nameReplacement);
+        path.basename = path.basename.replace(...nameReplacement);
+      }))
+      .pipe(gulp.dest(`./${platform}_cloned/`));
+  })
+));
 
 gulp.task('zero:setup:android', () => {
   const platform = 'android';
   const { moduleName, appId } = zero.readConfigs(platform);
+
   const nameReplacement = ['ZeroProj', moduleName];
 
   gulp.src(`./${platform}/**`)
@@ -92,7 +94,6 @@ gulp.task('zero:setup:android', () => {
 gulp.task('zero:setup', sequence(
   'zero:setup:clean',
   [
-    // 'zero:setup:android',
-    // 'zero:setup:ios',
+    'zero:setup:platforms',
   ]
 ));
