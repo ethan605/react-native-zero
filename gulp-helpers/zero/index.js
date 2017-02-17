@@ -17,7 +17,7 @@ import fs from 'fs';
 // import semver from 'semver';
 import yargs from 'yargs';
 
-// Output commands to be executed via "--clone" flag
+// Clone output files & folders via "--clone" flag
 const CLONE_RUN = !!yargs.argv.clone;
 
 const CONFIGS_FILE = './gulp-helpers/zero/configs.json';
@@ -59,7 +59,9 @@ gulp.task('zero:setup:clean', () => (
 ));
 
 gulp.task('zero:setup:prepare', () => (
-  gulp.src('./android/**').pipe(gulp.dest('./android.clone'))
+  CLONE_RUN
+    ? gulp.src('./android/**').pipe(gulp.dest('./android.clone'))
+    : null
 ));
 
 gulp.task('zero:setup:general', () => {
@@ -80,9 +82,11 @@ gulp.task('zero:setup:android', () => {
     },
   } = readConfigs('android');
 
+  const outDir = `./android${CLONE_RUN ? '.clone' : ''}`;
+
   gulp.src('./android/**/zeroproj-release-key.keystore')
     .pipe(rename((path => path.basename = keyStoreFileName)))
-    .pipe(gulp.dest('./android.clone'));
+    .pipe(gulp.dest(outDir));
 
   gulp.src('./android/**/build.gradle')
     .pipe(replace('ZeroProj', moduleName))
@@ -93,7 +97,7 @@ gulp.task('zero:setup:android', () => {
     .pipe(replace('ZEROPROJ_RELEASE_KEY_PASSWORD', keyPassword))
     .pipe(replace('code_push_release_key', codepushReleaseKey))
     .pipe(replace('code_push_staging_key', codepushStagingKey))
-    .pipe(gulp.dest('./android.clone'));
+    .pipe(gulp.dest(outDir));
 });
 
 gulp.task('zero:setup:ios', () => {
@@ -105,6 +109,8 @@ gulp.task('zero:setup:ios', () => {
   } = readConfigs('ios');
   const moduleNameReplacement = ['ZeroProj', moduleName];
 
+  const outDir = `./ios${CLONE_RUN ? '.clone' : ''}`;
+
   gulp.src('./ios/**')
     .pipe(replace(...moduleNameReplacement))
     .pipe(replace('com.zeroproj', appId))
@@ -114,7 +120,7 @@ gulp.task('zero:setup:ios', () => {
       path.dirname = path.dirname.replace(...moduleNameReplacement);
       path.basename = path.basename.replace(...moduleNameReplacement);
     }))
-    .pipe(gulp.dest('./ios.clone'));
+    .pipe(gulp.dest(outDir));
 });
 
 gulp.task('zero:setup', sequence(
