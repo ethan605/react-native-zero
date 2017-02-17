@@ -142,9 +142,9 @@ gulp.task('zero:setup', sequence(
     'zero:setup:android',
     'zero:setup:ios',
   ],
-  'zero:setup:remove-old',
-  'zero:setup:copy-new',
-  'zero:setup:cleanup',
+  CLONE_RUN ? undefined : 'zero:setup:remove-old',
+  CLONE_RUN ? undefined : 'zero:setup:copy-new',
+  CLONE_RUN ? undefined : 'zero:setup:cleanup',
 ));
 
 /* eslint-enable no-console */
