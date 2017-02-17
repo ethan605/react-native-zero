@@ -1,4 +1,4 @@
-package com.zeroproj;
+package com.app;
 
 import com.facebook.react.ReactActivity;
 
