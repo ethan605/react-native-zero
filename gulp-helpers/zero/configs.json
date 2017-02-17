@@ -2,11 +2,18 @@
   "packageName": "zero-app",
   "moduleName": "ZeroApp",
   "codepush": {
-    "release": "code_push_release_key",
-    "staging": "code_push_staging_key"
+    "release": "code_push_release_key-AgG",
+    "staging": "code_push_staging_key-AgG"
   },
   "android": {
-    "applicationId": "com.zeroapp.android"
+    "applicationId": "com.zeroapp.android",
+    "keyStoreFileName": "zeroapp-release-key",
+    "signingConfigs": {
+      "storeFile": "ZEROAPP_RELEASE_STORE_FILE",
+      "storePassword": "ZEROAPP_RELEASE_STORE_PASSWORD",
+      "keyAlias": "ZEROAPP_RELEASE_KEY_ALIAS",
+      "keyPassword": "ZEROAPP_RELEASE_KEY_PASSWORD"
+    }
   },
   "ios": {
     "bundleId": "com.zeroapp.ios"

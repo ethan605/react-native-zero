@@ -22,10 +22,12 @@ function readConfigs(platform) {
   const configs = fs.readFileSync(ZERO_CONFIGS_FILE);
 
   const {
-    packageName,
     moduleName,
-    codepush,
-    [platform]: { applicationId, bundleId },
+    codepush: {
+      release: codepushReleaseKey,
+      staging: codepushStagingKey,
+    },
+    [platform]: { applicationId, bundleId, ...rest },
   } = JSON.parse(configs);
 
   const appId = applicationId || bundleId;
@@ -40,10 +42,11 @@ function readConfigs(platform) {
   );
 
   return {
-    packageName,
-    moduleName,
-    codepush,
     appId,
+    codepushReleaseKey,
+    codepushStagingKey,
+    moduleName,
+    ...rest,
   };
 }
 
