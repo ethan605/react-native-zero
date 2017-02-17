@@ -5,30 +5,34 @@
 /* eslint-disable no-console */
 
 // Gulp modules
-const gulp = require('gulp');
-const shell = require('gulp-shell');
+import gulp from 'gulp';
+import sequence from 'gulp-sequence';
+import shell from 'gulp-shell';
 
 // Helper modules
-const fs = require('fs');
-const semver = require('semver');
-const yargs = require('yargs');
+import fs from 'fs';
+import semver from 'semver';
+import yargs from 'yargs';
 
 // Output commands to be executed via "--dry" flag
 const DRY_RUN = !!yargs.argv.dry;
 
-const CODEPUSH_CONFIGS_FILE = './gulp-helpers/codepush/configs.json';
-const CODEPUSH_RELEASE_DIR = './CodePushRelease';
-const CODEPUSH_BUNDLE_FILE = {
+const CONFIGS_FILE = './gulp-helpers/codepush/configs.json';
+const RELEASE_DIR = './CodePushRelease';
+const BUNDLE_FILE = {
   android: 'index.android.bundle',
   ios: 'main.jsbundle',
 };
-const CODEPUSH_ENTRY_FILE = {
+const ENTRY_FILE = {
   ios: 'index.ios.js',
   android: 'index.android.js',
 };
 
+/**
+ * Helpers
+ */
 function readConfigs() {
-  const configs = fs.readFileSync(CODEPUSH_CONFIGS_FILE);
+  const configs = fs.readFileSync(CONFIGS_FILE);
   const { appName, buildNumber, deploymentName, versionName } = JSON.parse(configs);
 
   console.assert(
@@ -56,10 +60,10 @@ function readConfigs() {
 
 function prepareCommand({ platform }) {
   const options = [
-    { flag: 'assets-dest', value: CODEPUSH_RELEASE_DIR },
-    { flag: 'bundle-output', value: `${CODEPUSH_RELEASE_DIR}/${CODEPUSH_BUNDLE_FILE[platform]}` },
+    { flag: 'assets-dest', value: RELEASE_DIR },
+    { flag: 'bundle-output', value: `${RELEASE_DIR}/${BUNDLE_FILE[platform]}` },
     { flag: 'dev', value: false },
-    { flag: 'entry-file', value: CODEPUSH_ENTRY_FILE[platform] },
+    { flag: 'entry-file', value: ENTRY_FILE[platform] },
     { flag: 'platform', value: platform },
   ];
 
@@ -77,7 +81,7 @@ function uploadCommand(configs) {
 
   const params = [
     appName,
-    CODEPUSH_RELEASE_DIR,
+    RELEASE_DIR,
     `~${versionName}`,
   ];
 
@@ -101,17 +105,31 @@ function execCommands(...commands) {
     gulp.src('.').pipe(shell(commands));
 }
 
-module.exports = {
-  execCommands,
-  prepareCommand,
-  readConfigs,
-  uploadCommand,
-  constants: {
-    CODEPUSH_CONFIGS_FILE,
-    CODEPUSH_RELEASE_DIR,
-    CODEPUSH_BUNDLE_FILE,
-    CODEPUSH_ENTRY_FILE,
-  },
-};
+/**
+ * Gulp tasks
+ */
+// Clean CodePush release folder & rebuild typescript sources
+gulp.task('codepush:clean', () => execCommands(
+  `rm -rf ${RELEASE_DIR}`,
+  `mkdir -p ${RELEASE_DIR}`
+));
+
+// Prepare bundle files for both Android & iOS
+gulp.task('codepush:prepare', () => execCommands(
+  prepareCommand({ platform: 'android' }),
+  prepareCommand({ platform: 'ios' })
+));
+
+// Upload to CodePush server
+gulp.task('codepush:upload', () => execCommands(
+  uploadCommand(readConfigs())
+));
+
+// Combine tasks
+gulp.task('codepush:release', sequence(
+  'codepush:clean',
+  'codepush:prepare',
+  'codepush:upload'
+));
 
 /* eslint-enable no-console */
