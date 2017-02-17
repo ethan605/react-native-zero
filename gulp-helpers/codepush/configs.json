@@ -1,11 +1,6 @@
 {
-  "app_name": "ZeroProj",
-  "version_name": "1.0.0",
-  "build_number": 1,
-  "build_target": "debug",
-  "deployment_keys": {
-    "debug": "not_available",
-    "release": "code_push_release_key",
-    "staging": "code_push_staging_key"
-  }
+  "appName": "ZeroProj",
+  "buildNumber": "1a",
+  "deploymentName": "Staging",
+  "versionName": "1.0.0"
 }

@@ -1,9 +1,13 @@
 {
   "packageName": "react-native-zero",
   "moduleName": "ZeroProj",
+  "codepush": {
+    "release": "code_push_release_key",
+    "staging": "code_push_staging_key"
+  },
   "android": {
-    "package": "com.zeroproj",
-    "applicationId": "com.zeroproj"
+    "applicationId": "com.zeroproj",
+    "appName": "ZeroProj"
   },
   "ios": {
     "bundleId": "com.zeroproj",

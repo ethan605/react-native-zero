@@ -12,5 +12,12 @@
       "./ios/ZeroProj.xcodeproj",
       "./ios/ZeroProj"
     ]
+  },
+  "android": {
+    "fileContents": [
+      "./android/app/src/main/java/com/app/MainActivity.java",
+      "./android/app/build.gradle",
+      "./android/settings.gradle"
+    ]
   }
 }

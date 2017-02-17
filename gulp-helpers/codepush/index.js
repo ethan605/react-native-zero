@@ -9,7 +9,7 @@ const shell = require('gulp-shell');
 
 // Helper modules
 const fs = require('fs');
-const lodash = require('lodash');
+const semver = require('semver');
 const yargs = require('yargs');
 
 // Output commands to be executed via "--dry" flag
@@ -28,17 +28,27 @@ const CODEPUSH_ENTRY_FILE = {
 
 function readConfigs() {
   const content = fs.readFileSync(CODEPUSH_CONFIGS_FILE);
-  const {
-    app_name: appName,
-    build_number: buildNumber,
-    build_target: target,
-    version_name: versionName,
-  } = JSON.parse(content);
+  const { appName, buildNumber, deploymentName, versionName } = JSON.parse(content);
+
+  console.assert(
+    parseInt(buildNumber) > 0,
+    `buildNumber must be natural number (current: ${buildNumber})`
+  );
+
+  console.assert(
+    ['Staging', 'Release'].indexOf(deploymentName) !== -1,
+    `deploymentName must be either "Staging" or "Release" (current: ${deploymentName})`
+  );
+
+  console.assert(
+    semver.valid(versionName),
+    `versionName must be a valid semver (current: ${versionName})`
+  );
   
   return {
     appName,
-    buildNumber,
-    target,
+    buildNumber: parseInt(buildNumber),
+    deploymentName,
     versionName,
   };
 }
@@ -59,9 +69,8 @@ function prepareCommand({ platform }) {
 }
 
 function uploadCommand(configs) {
-  const { appName, buildNumber, target, versionName } = configs;
-  
-  const deploymentName = lodash.capitalize(target);
+  const { appName, buildNumber, deploymentName, versionName } = configs;
+
   const readableVersion = `${deploymentName} ${versionName} build-${buildNumber}`;
   const description = `Universal iOS & Android update (${readableVersion})`;
 
@@ -74,7 +83,7 @@ function uploadCommand(configs) {
   const options = [
     { flag: 'deploymentName', value: deploymentName },
     { flag: 'description', value: `'${description}'` },
-    { flag: 'disabled', value: target === 'release' },
+    { flag: 'disabled', value: deploymentName === 'Release' },
   ];
 
   const command = 'code-push release';
