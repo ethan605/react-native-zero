@@ -68,7 +68,7 @@ function uploadCommand(configs) {
   const params = [
     appName,
     CODEPUSH_RELEASE_DIR,
-    `~${versionName}`
+    `~${versionName}`,
   ];
 
   const options = [
