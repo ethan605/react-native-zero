@@ -18,7 +18,7 @@ import fs from 'fs';
 import yargs from 'yargs';
 
 // Clone output files & folders via "--clone" flag
-const CLONE_DIR = './cloned';
+const CLONE_DIR = './.cloned';
 const CLONE_RUN = !!yargs.argv.clone;
 
 const CONFIGS_FILE = './gulp-helpers/zero/configs.json';
