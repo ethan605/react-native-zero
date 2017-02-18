@@ -27,13 +27,22 @@ function readConfigs(platform) {
   const configs = fs.readFileSync(CONFIGS_FILE);
 
   const {
+    packageName,
     moduleName,
     codepush: {
       release: codepushReleaseKey,
       staging: codepushStagingKey,
     },
-    [platform]: { applicationId, bundleId, ...rest },
+    [platform]: platformBased,
   } = JSON.parse(configs);
+
+  if (platform === 'general')
+    return {
+      packageName,
+      moduleName,
+    };
+
+  const { applicationId, bundleId, ...rest } = platformBased;
 
   const appId = applicationId || bundleId;
   const appIdNames = {
@@ -55,12 +64,12 @@ function readConfigs(platform) {
   };
 }
 
-gulp.task('zero:backup', () => (
-  ['android', 'ios'].forEach(platform => (
-    gulp.src(`./${platform}/**`)
-      .pipe(gulp.dest(`./bak/${platform}`))
-  ))
-));
+gulp.task('zero:backup', () => {
+  gulp.src('./android/**').pipe(gulp.dest('./bak/android'));
+  gulp.src('./ios/**').pipe(gulp.dest('./bak/ios'));
+  gulp.src('./package.json').pipe(gulp.dest('./bak'));
+  gulp.src('./gulp-helpers/codepush/configs.json').pipe(gulp.dest('./bak/gulp-helpers/codepush'));
+});
 
 gulp.task('zero:setup:cleanup', () => (
   gulp.src(CLONE_DIR).pipe(clean())
@@ -74,6 +83,16 @@ gulp.task('zero:setup:prepare', () => (
 ));
 
 gulp.task('zero:setup:general', () => {
+  const { packageName, moduleName } = readConfigs('general');
+
+  gulp.src('./gulp-helpers/codepush/configs.json')
+    .pipe(replace('appName', moduleName))
+    .pipe(gulp.dest(`./${CLONE_DIR}/gulp-helpers/codepush`));
+
+  return gulp.src('./package.json')
+    .pipe(replace('react-native-zero', packageName))
+    .pipe(replace('ZeroProj', moduleName))
+    .pipe(gulp.dest(`./${CLONE_DIR}`));
 });
 
 gulp.task('zero:setup:android', () => {
@@ -141,6 +160,7 @@ gulp.task('zero:setup', sequence(
   'zero:setup:cleanup',
   'zero:setup:prepare',
   [
+    'zero:setup:general',
     'zero:setup:android',
     'zero:setup:ios',
   ],
