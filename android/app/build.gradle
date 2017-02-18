@@ -122,6 +122,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
             buildConfigField "String", "CODEPUSH_KEY", '"code_push_release_key"'
             resValue "string", "app_name", "ZeroProj"
         }
@@ -129,6 +130,7 @@ android {
             applicationIdSuffix ".stg"
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
             buildConfigField "String", "CODEPUSH_KEY", '"code_push_staging_key"'
             resValue "string", "app_name", "ZeroProj-STG"
         }
