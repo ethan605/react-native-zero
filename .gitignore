@@ -56,3 +56,5 @@ fastlane/screenshots
 
 CodePushRelease/
 __cloned__
+.vscode/
+jsconfig.json
