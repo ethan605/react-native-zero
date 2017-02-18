@@ -1,6 +1,7 @@
 {
   "packageName": "zero-app",
   "moduleName": "ZeroApp",
+  "gitRemoteUrl": "git@github.com/ethan605/zero-app.git",
   "codepush": {
     "release": "code_push_release_key-AgG",
     "staging": "code_push_staging_key-AgG"

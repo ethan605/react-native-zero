@@ -11,6 +11,7 @@ import clean from 'gulp-clean';
 import rename from 'gulp-rename';
 import replace from 'gulp-replace';
 import sequence from 'gulp-sequence';
+import shell from 'gulp-shell';
 
 // Helper modules
 import fs from 'fs';
@@ -29,6 +30,7 @@ function readConfigs(platform) {
   const {
     packageName,
     moduleName,
+    gitRemoteUrl,
     codepush: {
       release: codepushReleaseKey,
       staging: codepushStagingKey,
@@ -40,6 +42,7 @@ function readConfigs(platform) {
     return {
       packageName,
       moduleName,
+      gitRemoteUrl,
     };
 
   const { applicationId, bundleId, ...rest } = platformBased;
@@ -81,6 +84,19 @@ gulp.task('zero:setup:prepare', () => (
     '!./android/**/zeroproj-release-key.keystore',
   ]).pipe(gulp.dest(`./${CLONE_DIR}/android`))
 ));
+
+gulp.task('zero:setup:git', () => {
+  const { gitRemoteUrl } = readConfigs('general');
+  
+  gulp.src('.')
+    .pipe(shell([
+      'rm -rf .git',
+      'git init',
+      `git remote add origin ${gitRemoteUrl}`,
+      'git config --local --add branch.master.remote origin',
+      'git config --local --add branch.master.merge refs/heads/master',
+    ]));
+});
 
 gulp.task('zero:setup:general', () => {
   const { packageName, moduleName } = readConfigs('general');
