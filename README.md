@@ -8,6 +8,7 @@ React Native boilerplate project with highly customization via command line tool
 * [ ] `android/settings.gradle`
 * [ ] `package.json`
 * [ ] `gulp-helpers/codepush/configs.json`
+* [ ] `README`
 * [ ] **JS files**
 
 ### JS boilerplate
