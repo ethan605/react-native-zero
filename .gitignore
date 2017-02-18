@@ -55,4 +55,4 @@ fastlane/Preview.html
 fastlane/screenshots
 
 CodePushRelease/
-.cloned
+__cloned__
