@@ -152,13 +152,19 @@ gulp.task('zero:setup:ios', () => {
 gulp.task('zero:setup:js', () => {
   const { moduleName } = readConfigs('general');
 
+  // Replace and copy `index.android.js`, `index.ios.js`
   gulp.src('./index.*.js')
     .pipe(replace('ZeroProj', moduleName))
     .pipe(gulp.dest(`${CLONE_DIR}`));
 
+  // Replace and copy JS files under `app/` dir
   gulp.src('./app/**/*.js')
     .pipe(replace('ZeroProj', moduleName))
     .pipe(gulp.dest(`${CLONE_DIR}/app`));
+
+  // Copy `assets` file without content replaces
+  gulp.src('./app/assets/**')
+    .pipe(gulp.dest(`${CLONE_DIR}/app/assets`));
 });
 
 gulp.task('zero:setup:general', () => {
