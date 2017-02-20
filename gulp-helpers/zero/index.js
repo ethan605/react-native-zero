@@ -7,6 +7,7 @@
 // Gulp modules
 import gulp from 'gulp';
 import clean from 'gulp-clean';
+import file from 'gulp-file';
 import rename from 'gulp-rename';
 import replace from 'gulp-replace';
 import sequence from 'gulp-sequence';
@@ -90,14 +91,18 @@ gulp.task('zero:setup:cleanup', () => (
 gulp.task('zero:setup:general', () => {
   const { packageName, moduleName } = readConfigs('general');
 
-  gulp.src('./gulp-helpers/codepush/configs.json')
-    .pipe(replace('ZeroProj', moduleName))
-    .pipe(gulp.dest(`${CLONE_DIR}/gulp-helpers/codepush`));
-
   gulp.src('./package.json')
     .pipe(replace('react-native-zero', packageName))
     .pipe(replace('ZeroProj', moduleName))
     .pipe(gulp.dest(CLONE_DIR));
+
+  gulp.src('./gulp-helpers/codepush/configs.json')
+    .pipe(replace('ZeroProj', moduleName))
+    .pipe(gulp.dest(`${CLONE_DIR}/gulp-helpers/codepush`));
+
+  gulp.src('.')
+    .pipe(file('README.md', `# ${moduleName}`))
+    .pipe(gulp.dest('.'));
 });
 
 gulp.task('zero:setup:android', () => {
