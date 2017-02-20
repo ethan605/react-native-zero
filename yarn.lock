@@ -4567,6 +4567,10 @@ react-native-code-push@^1.17.0-beta:
     inquirer "1.1.2"
     plist "1.2.0"
 
+react-native-device-info@^0.9.9:
+  version "0.9.9"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.9.9.tgz#42490719b8be2b8ffe689f3c74d56884ca05c0d7"
+
 react-native-experimental-navigation@0.26.x:
   version "0.26.10"
   resolved "https://registry.yarnpkg.com/react-native-experimental-navigation/-/react-native-experimental-navigation-0.26.10.tgz#355e37929a2bfb84088dca331f34bc575297df68"
@@ -4590,6 +4594,13 @@ react-native-router-flux@^3.37.0:
 react-native-tabs@^1.0.9:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/react-native-tabs/-/react-native-tabs-1.0.9.tgz#75d3c35e8b5b6970869eab282372cb32e2a782cd"
+
+react-native-vector-icons@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.0.0.tgz#6a2f8f4c6ace613aed7748cd530809283e5b1538"
+  dependencies:
+    lodash "^4.0.0"
+    yargs "^6.3.0"
 
 react-native@0.41.2:
   version "0.41.2"
@@ -5213,6 +5224,10 @@ simple-plist@0.1.4:
     bplist-creator "0.0.4"
     bplist-parser "0.0.6"
     plist "1.2.0"
+
+singleton@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/singleton/-/singleton-1.0.0.tgz#e5f1ab11b5d0b77a171ef9ffd5d93483d1356cde"
 
 slash@1.0.0, slash@^1.0.0:
   version "1.0.0"
