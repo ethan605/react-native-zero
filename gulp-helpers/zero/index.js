@@ -9,7 +9,6 @@ import gulp from 'gulp';
 import clean from 'gulp-clean';
 import rename from 'gulp-rename';
 import replace from 'gulp-replace';
-import run from 'gulp-run';
 import sequence from 'gulp-sequence';
 import shell from 'gulp-shell';
 
@@ -75,13 +74,6 @@ function execCommands(...commands) {
   else
     gulp.src('.').pipe(shell(commands));
 }
-
-// function runSequence(...commands) {
-//   if (DRY_RUN)
-//     console.log(['Commands to be executed:\n', ...commands, '\n'].join('\n'));
-//   else
-//     run(commands.join('; ')).exec();
-// }
 
 gulp.task('zero:backup', () => {
   gulp.src('./android/**').pipe(gulp.dest('./bak/android'));
@@ -175,7 +167,14 @@ gulp.task('zero:setup:ios', () => {
     .pipe(gulp.dest(`${CLONE_DIR}/ios`));
 });
 
-gulp.task('zero:setup:git', () => {
+gulp.task('zero:setup', sequence(
+  'zero:setup:cleanup',
+  'zero:setup:android',
+  'zero:setup:ios',
+  'zero:setup:general'
+));
+
+gulp.task('zero:apply:git', () => {
   const { gitRemoteUrl } = readConfigs('general');
   
   execCommands(
@@ -187,7 +186,7 @@ gulp.task('zero:setup:git', () => {
   );
 });
 
-gulp.task('zero:setup:apply', () => (
+gulp.task('zero:apply:platforms', () => (
   execCommands(
     'rm -rf ./android ./ios',
     `cp -r ${CLONE_DIR}/android .`,
@@ -195,21 +194,9 @@ gulp.task('zero:setup:apply', () => (
   )
 ));
 
-gulp.task('zero:setup', sequence(
-  'zero:setup:cleanup',
-  'zero:setup:general',
-  'zero:setup:android',
-  'zero:setup:ios'
-));
-
 gulp.task('zero:apply', sequence(
-  'zero:setup:git',
-  'zero:setup:apply'
-));
-
-gulp.task('zero', sequence(
-  'zero:setup',
-  'zero:apply'
+  'zero:apply:git',
+  'zero:apply:platforms'
 ));
 
 /* eslint-enable no-console */
