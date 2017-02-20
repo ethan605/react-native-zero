@@ -84,26 +84,9 @@ gulp.task('zero:backup', () => {
   gulp.src('./gulp-helpers/codepush/configs.json').pipe(gulp.dest('./bak/gulp-helpers/codepush'));
 });
 
-gulp.task('zero:setup:cleanup', () => (
+gulp.task('zero:setup:clean', () => (
   gulp.src(CLONE_DIR).pipe(clean())
 ));
-
-gulp.task('zero:setup:general', () => {
-  const { packageName, moduleName } = readConfigs('general');
-
-  gulp.src('./package.json')
-    .pipe(replace('react-native-zero', packageName))
-    .pipe(replace('ZeroProj', moduleName))
-    .pipe(gulp.dest(CLONE_DIR));
-
-  gulp.src('./gulp-helpers/codepush/configs.json')
-    .pipe(replace('ZeroProj', moduleName))
-    .pipe(gulp.dest(`${CLONE_DIR}/gulp-helpers/codepush`));
-
-  gulp.src('.')
-    .pipe(file('README.md', `# ${moduleName}`))
-    .pipe(gulp.dest('.'));
-});
 
 gulp.task('zero:setup:android', () => {
   const {
@@ -169,6 +152,34 @@ gulp.task('zero:setup:js', () => {
     .pipe(gulp.dest(`${CLONE_DIR}/app`));
 });
 
+gulp.task('zero:setup:general', () => {
+  const { packageName, moduleName } = readConfigs('general');
+
+  gulp.src('./package.json')
+    .pipe(replace('react-native-zero', packageName))
+    .pipe(replace('ZeroProj', moduleName))
+    .pipe(gulp.dest(CLONE_DIR));
+
+  gulp.src('./gulp-helpers/codepush/configs.json')
+    .pipe(replace('ZeroProj', moduleName))
+    .pipe(gulp.dest(`${CLONE_DIR}/gulp-helpers/codepush`));
+
+  file('README.md', `# ${moduleName}`, { src: true })
+    .pipe(gulp.dest('.'));
+});
+
+gulp.task('zero:apply:clean-ios', () => (
+  gulp.src('./ios').pipe(clean())
+));
+
+gulp.task('zero:apply:clean-clones', () => (
+  gulp.src(CLONE_DIR).pipe(clean())
+));
+
+gulp.task('zero:apply:platforms', () => (
+  gulp.src(`${CLONE_DIR}/**`).pipe(gulp.dest('.'))
+));
+
 gulp.task('zero:apply:git', () => {
   const { gitRemoteUrl } = readConfigs('general');
   
@@ -181,15 +192,8 @@ gulp.task('zero:apply:git', () => {
   );
 });
 
-gulp.task('zero:apply:platforms', () => (
-  execCommands(
-    'rm -rf ./ios',               // Remove ios folder to avoid duplications
-    `cp -r ${CLONE_DIR}/* .`
-  )
-));
-
 gulp.task('zero:setup', sequence(
-  'zero:setup:cleanup',
+  'zero:setup:clean',
   'zero:setup:android',
   'zero:setup:ios',
   'zero:setup:js',
@@ -197,8 +201,10 @@ gulp.task('zero:setup', sequence(
 ));
 
 gulp.task('zero:apply', sequence(
-  'zero:apply:git',
-  'zero:apply:platforms'
+  'zero:apply:clean-ios',
+  'zero:apply:platforms',
+  'zero:apply:clean-clones',
+  'zero:apply:git'
 ));
 
 /* eslint-enable no-console */
