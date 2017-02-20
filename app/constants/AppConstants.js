@@ -10,8 +10,8 @@ const isDevMode = global.__DEV__;
 export const SERVICE_API = {
   API_VERSION: 'v1',
   BASE_URI: isDevMode
-    ? 'https://dev.zero-proj.com'
-    : 'https://api.zero-proj.com',
+    ? 'https://dev.api-services.com'
+    : 'https://api.api-services.com',
   PAGINATION: 20,
   REQUEST_METHODS: {
     DELETE: 'del',
