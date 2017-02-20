@@ -59,13 +59,13 @@ export default class AppRouter extends React.Component {
     const firstSceneProps = {
       ...this.navigationProps,
       component: FirstScene,
-      title: 'EasyCargo',
+      title: 'ZeroProj',
     };
 
     const secondSceneProps = {
       ...this.navigationProps,
       component: SecondScene,
-      title: 'Login',
+      title: 'Something Fancy',
     };
 
     return (
