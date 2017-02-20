@@ -12,14 +12,14 @@ React Native boilerplate project with highly customization via command line tool
 * [ ] **JS files**
 
 ### JS boilerplate
-* [ ] `DeviceUtils`
-* [ ] `FontUtils`
+* [x] `DeviceUtils`
+* [x] `FontUtils`
 * [ ] `AppRouter`
 
 ### Modules
-* [ ] `singleton`
-* [ ] `react-native-device-info`
-* [ ] `react-native-vector-icons`
+* [x] `singleton`
+* [x] `react-native-device-info`
+* [x] `react-native-vector-icons`
 
 ## Versions
 

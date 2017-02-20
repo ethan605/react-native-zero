@@ -8,7 +8,6 @@
   },
   "android": {
     "applicationId": "com.zeroapp.android",
-    "keyStoreFileName": "zeroapp-release-key",
     "signingConfigs": {
       "storeFile": "ZEROAPP_RELEASE_STORE_FILE",
       "storePassword": "ZEROAPP_RELEASE_STORE_PASSWORD",

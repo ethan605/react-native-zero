@@ -10,6 +10,7 @@ import clean from 'gulp-clean';
 // import debug from 'gulp-debug';
 import rename from 'gulp-rename';
 import replace from 'gulp-replace';
+import run from 'gulp-run';
 import sequence from 'gulp-sequence';
 import shell from 'gulp-shell';
 
@@ -76,6 +77,13 @@ function execCommands(...commands) {
     gulp.src('.').pipe(shell(commands));
 }
 
+function runSequence(...commands) {
+  if (DRY_RUN)
+    console.log(['Commands to be executed:\n', ...commands, '\n'].join('\n'));
+  else
+    run(commands.join('; ')).exec();
+}
+
 gulp.task('zero:backup', () => {
   gulp.src('./android/**').pipe(gulp.dest('./bak/android'));
   gulp.src('./ios/**').pipe(gulp.dest('./bak/ios'));
@@ -104,7 +112,7 @@ gulp.task('zero:setup:prepare', () => (
 gulp.task('zero:setup:git', () => {
   const { gitRemoteUrl } = readConfigs('general');
   
-  execCommands(
+  runSequence(
     'rm -rf .git',
     'git init',
     `git remote add origin ${gitRemoteUrl}`,
@@ -132,7 +140,6 @@ gulp.task('zero:setup:android', () => {
     codepushReleaseKey,
     codepushStagingKey,
     moduleName,
-    keyStoreFileName,
     signingConfigs: {
       storeFile,
       storePassword,
@@ -141,11 +148,7 @@ gulp.task('zero:setup:android', () => {
     },
   } = readConfigs('android');
 
-  gulp.src('./android/**/zeroproj-release-key.keystore')
-    .pipe(rename((path => path.basename = keyStoreFileName)))
-    .pipe(gulp.dest(`${CLONE_DIR}/android`));
-
-  gulp.src('./android/**/build.gradle')
+  gulp.src('./android/**')
     .pipe(replace('ZeroProj', moduleName))
     .pipe(replace('com.zeroproj', appId))
     .pipe(replace('ZEROPROJ_RELEASE_STORE_FILE', storeFile))
@@ -178,20 +181,13 @@ gulp.task('zero:setup:ios', () => {
     .pipe(gulp.dest(`${CLONE_DIR}/ios/`));
 });
 
-gulp.task('zero:setup:apply:clean', () => (
-  gulp.src(['./android', './ios']).pipe(clean())
-));
-
-gulp.task('zero:setup:apply:copy', () => (
-  execCommands(
+gulp.task('zero:setup:apply', () => (
+  runSequence(
+    'rm -rf ./android ./ios',
     `cp -r ${CLONE_DIR}/android .`,
-    `cp -r ${CLONE_DIR}/ios .`
+    `cp -r ${CLONE_DIR}/ios .`,
+    'rm -rf ./bak/'
   )
-));
-
-gulp.task('zero:setup:apply', sequence(
-  'zero:setup:apply:clean',
-  'zero:setup:apply:copy'
 ));
 
 gulp.task('zero:setup', sequence(
