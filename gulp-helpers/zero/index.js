@@ -128,11 +128,20 @@ gulp.task('zero:setup:ios', () => {
   } = readConfigs('ios');
   const moduleNameReplacement = ['ZeroProj', moduleName];
 
-  gulp.src('./ios/**')
+  // Replace content for text files
+  gulp.src(['./ios/**', '!./ios/**/*.png'])
     .pipe(replace(...moduleNameReplacement))
     .pipe(replace('com.zeroproj', appId))
     .pipe(replace('code_push_release_key', codepushReleaseKey))
     .pipe(replace('code_push_staging_key', codepushStagingKey))
+    .pipe(rename(path => {
+      path.dirname = path.dirname.replace(...moduleNameReplacement);
+      path.basename = path.basename.replace(...moduleNameReplacement);
+    }))
+    .pipe(gulp.dest(`${CLONE_DIR}/ios`));
+
+  // Copy & rename only for asset files
+  gulp.src('./ios/**/*.png')
     .pipe(rename(path => {
       path.dirname = path.dirname.replace(...moduleNameReplacement);
       path.basename = path.basename.replace(...moduleNameReplacement);
