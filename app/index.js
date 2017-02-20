@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
-// import CodePush from 'react-native-code-push';
+import CodePush from 'react-native-code-push';
 import { Provider } from 'react-redux';
 
 // Components
@@ -18,10 +18,10 @@ import { FEATURES } from './constants/Flags';
 // Redux
 import store from './redux/store';
 
-// const CODEPUSH_OPTIONS = {
-//   checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
-//   installMode: CodePush.InstallMode.IMMEDIATE,
-// };
+const CODEPUSH_OPTIONS = {
+  checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
+  installMode: CodePush.InstallMode.IMMEDIATE,
+};
 
 class App extends React.Component {
   componentDidMount() {
@@ -48,5 +48,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
-// export default CodePush(CODEPUSH_OPTIONS)(App);
+export default CodePush(CODEPUSH_OPTIONS)(App);

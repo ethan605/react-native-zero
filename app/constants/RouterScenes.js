@@ -4,10 +4,10 @@
 
 // Root
 const ROOT_SCENE = 'rootScene';
-const LAUNCH_SCENCE = 'launchScene';
 
-// Main screens
-const MAIN_CONTENT = 'mainContent';
+// Scenes
+const FIRST_SCENE = 'firstScene';
+const SECOND_SCENE = 'secondScene';
 
 // Key suffixes
 const WRAPPER_KEY_SUFFIX = 'Wrapper';
@@ -18,9 +18,9 @@ const POP_UP_KEY_SUFFIX = 'PopUp';
 
 export default {
   ROOT_SCENE,
-  LAUNCH_SCENCE,
 
-  MAIN_CONTENT,
+  FIRST_SCENE,
+  SECOND_SCENE,
 
   // Key suffixes
   WRAPPER_KEY_SUFFIX,

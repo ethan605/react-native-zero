@@ -3,35 +3,76 @@
  */
 
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform } from 'react-native';
+import { Router, Scene } from 'react-native-router-flux';
 
-class AppRouter extends React.Component {
+// Components
+import FirstScene from 'app/components/FirstScene';
+import SecondScene from 'app/components/SecondScene';
+
+// Constants
+import RouterScenes from 'app/constants/RouterScenes';
+
+// Locals
+import animationStyle from './animationStyle';
+import createReducer from './createReducer';
+import { platformBasedPanHandlers } from './getPanHandlers';
+import renderTitle from './renderTitle';
+import styles from './styles';
+
+const navigationBarBackgroundImage = require('app/assets/images/nav-bar-background.png');
+
+const {
+  FIRST_SCENE,
+  SECOND_SCENE,
+} = RouterScenes;
+
+export default class AppRouter extends React.Component {
   componentDidMount() {
   }
 
+  get routerProps() {
+    return {
+      animationStyle,
+      createReducer,
+      passProps: true,
+      sceneStyle: styles.navScenes,
+      ...platformBasedPanHandlers,
+    };
+  }
+
+  get navigationProps() {
+    return {
+      // backButtonImage,
+      // drawerImage,
+      renderTitle,
+      leftButtonStyle: styles.navButton,
+      navigationBarStyle: styles.navBar,
+      sceneStyle: styles.navScenes,
+      titleStyle: styles.navTitle,
+      ...platformBasedPanHandlers(),
+      ...Platform.select({ ios: { navigationBarBackgroundImage } }),
+    };
+  }
+
   render() {
+    const firstSceneProps = {
+      ...this.navigationProps,
+      component: FirstScene,
+      title: 'EasyCargo',
+    };
+
+    const secondSceneProps = {
+      ...this.navigationProps,
+      component: SecondScene,
+      title: 'Login',
+    };
+
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          ZeroProj AppRouter
-        </Text>
-      </View>
+      <Router {...this.routerProps}>
+        <Scene initial key={FIRST_SCENE} {...firstSceneProps} />
+        <Scene key={SECOND_SCENE} {...secondSceneProps} />
+      </Router>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-});
-
-export default AppRouter;
