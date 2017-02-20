@@ -4,10 +4,10 @@ React Native boilerplate project with highly customization via command line tool
 ## Todos
 
 ### Refactoring
-* [ ] `android/app/src/main/java/com/app/MainActivity.java`
-* [ ] `android/settings.gradle`
-* [ ] `package.json`
-* [ ] `gulp-helpers/codepush/configs.json`
+* [x] `android/app/src/main/java/com/app/MainActivity.java`
+* [x] `android/settings.gradle`
+* [x] `package.json`
+* [x] `gulp-helpers/codepush/configs.json`
 * [ ] `README`
 * [ ] **JS files**
 

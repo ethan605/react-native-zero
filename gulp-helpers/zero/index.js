@@ -124,14 +124,16 @@ gulp.task('zero:setup:git', () => {
 gulp.task('zero:setup:general', () => {
   const { packageName, moduleName } = readConfigs('general');
 
-  gulp.src('./gulp-helpers/codepush/configs.json')
-    .pipe(replace('appName', moduleName))
-    .pipe(gulp.dest(`${CLONE_DIR}/gulp-helpers/codepush`));
+  const destDir = DRY_RUN ? CLONE_DIR : '.';
 
-  return gulp.src('./package.json')
+  gulp.src('./gulp-helpers/codepush/configs.json')
+    .pipe(replace('ZeroProj', moduleName))
+    .pipe(gulp.dest(`${destDir}/gulp-helpers/codepush`));
+
+  gulp.src('./package.json')
     .pipe(replace('react-native-zero', packageName))
     .pipe(replace('ZeroProj', moduleName))
-    .pipe(gulp.dest(`${CLONE_DIR}`));
+    .pipe(gulp.dest(destDir));
 });
 
 gulp.task('zero:setup:android', () => {
@@ -193,10 +195,10 @@ gulp.task('zero:setup:apply', () => (
 gulp.task('zero:setup', sequence(
   'zero:setup:cleanup',
   'zero:setup:prepare',
-  'zero:setup:git',
   'zero:setup:general',
   'zero:setup:android',
   'zero:setup:ios',
+  'zero:setup:git',
   'zero:setup:apply'
 ));
 
