@@ -25,6 +25,8 @@ const DRY_RUN = !!yargs.argv.dry;
 const CLONE_DIR = './__cloned__';
 
 const CONFIGS_FILE = './gulp-helpers/zero/configs.json';
+const DEFAULT_MODULE_NAME = 'ZeroProj';
+const DEFAULT_PACKAGE_NAME = 'com.zeroproj';
 
 function readConfigs(platform) {
   const configs = fs.readFileSync(CONFIGS_FILE);
@@ -108,8 +110,8 @@ gulp.task('zero:setup:android', () => {
     'android/**/build.gradle',
     'android/settings.gradle',
   ])
-    .pipe(replace('ZeroProj', moduleName))
-    .pipe(replace('com.zeroproj', appId))
+    .pipe(replace(DEFAULT_MODULE_NAME, moduleName))
+    .pipe(replace(DEFAULT_PACKAGE_NAME, appId))
     .pipe(replace('ZEROPROJ_RELEASE_STORE_FILE', storeFile))
     .pipe(replace('ZEROPROJ_RELEASE_STORE_PASSWORD', storePassword))
     .pipe(replace('ZEROPROJ_RELEASE_KEY_ALIAS', keyAlias))
@@ -126,12 +128,12 @@ gulp.task('zero:setup:ios', () => {
     codepushStagingKey,
     moduleName,
   } = readConfigs('ios');
-  const moduleNameReplacement = ['ZeroProj', moduleName];
+  const moduleNameReplacement = [DEFAULT_MODULE_NAME, moduleName];
 
   // Replace content for text files
   gulp.src(['./ios/**', '!./ios/**/*.png'])
     .pipe(replace(...moduleNameReplacement))
-    .pipe(replace('com.zeroproj', appId))
+    .pipe(replace(DEFAULT_PACKAGE_NAME, appId))
     .pipe(replace('code_push_release_key', codepushReleaseKey))
     .pipe(replace('code_push_staging_key', codepushStagingKey))
     .pipe(rename(path => {
@@ -154,12 +156,12 @@ gulp.task('zero:setup:js', () => {
 
   // Replace and copy `index.android.js`, `index.ios.js`
   gulp.src('./index.*.js')
-    .pipe(replace('ZeroProj', moduleName))
+    .pipe(replace(DEFAULT_MODULE_NAME, moduleName))
     .pipe(gulp.dest(`${CLONE_DIR}`));
 
   // Replace and copy JS files under `app/` dir
   gulp.src('./app/**/*.js')
-    .pipe(replace('ZeroProj', moduleName))
+    .pipe(replace(DEFAULT_MODULE_NAME, moduleName))
     .pipe(gulp.dest(`${CLONE_DIR}/app`));
 
   // Copy `assets` file without content replaces
@@ -172,11 +174,11 @@ gulp.task('zero:setup:general', () => {
 
   gulp.src('./package.json')
     .pipe(replace('react-native-zero', packageName))
-    .pipe(replace('ZeroProj', moduleName))
+    .pipe(replace(DEFAULT_MODULE_NAME, moduleName))
     .pipe(gulp.dest(CLONE_DIR));
 
   gulp.src('./gulp-helpers/codepush/configs.json')
-    .pipe(replace('ZeroProj', moduleName))
+    .pipe(replace(DEFAULT_MODULE_NAME, moduleName))
     .pipe(gulp.dest(`${CLONE_DIR}/gulp-helpers/codepush`));
 
   file('README.md', `# ${moduleName}`, { src: true })
