@@ -76,18 +76,12 @@ function execCommands(...commands) {
 }
 
 gulp.task('zero:backup', () => {
+  gulp.src(['./package.json', './index.*.js']).pipe(gulp.dest('./bak'));
   gulp.src('./android/**').pipe(gulp.dest('./bak/android'));
+  gulp.src('./app/**/*.js').pipe(gulp.dest('./bak/app'));
   gulp.src('./ios/**').pipe(gulp.dest('./bak/ios'));
-  gulp.src('./package.json').pipe(gulp.dest('./bak'));
   gulp.src('./gulp-helpers/codepush/configs.json').pipe(gulp.dest('./bak/gulp-helpers/codepush'));
 });
-
-gulp.task('zero:restore', () => (
-  execCommands(
-    'cp -r ./bak/android .',
-    'cp -r ./bak/ios .'
-  )
-));
 
 gulp.task('zero:setup:cleanup', () => (
   gulp.src(CLONE_DIR).pipe(clean())
@@ -120,14 +114,12 @@ gulp.task('zero:setup:android', () => {
     },
   } = readConfigs('android');
 
-  const filesToReplace = [
+  // Replace specific files
+  gulp.src([
     'android/**/MainActivity.java',
     'android/**/build.gradle',
     'android/settings.gradle',
-  ];
-
-  // Replace specific files
-  gulp.src(filesToReplace)
+  ])
     .pipe(replace('ZeroProj', moduleName))
     .pipe(replace('com.zeroproj', appId))
     .pipe(replace('ZEROPROJ_RELEASE_STORE_FILE', storeFile))
@@ -136,13 +128,6 @@ gulp.task('zero:setup:android', () => {
     .pipe(replace('ZEROPROJ_RELEASE_KEY_PASSWORD', keyPassword))
     .pipe(replace('code_push_release_key', codepushReleaseKey))
     .pipe(replace('code_push_staging_key', codepushStagingKey))
-    .pipe(gulp.dest(`${CLONE_DIR}/android`));
-
-  // Copy other files
-  gulp.src([
-    './android/**',
-    ...filesToReplace.map(filename => `!${filename}`),
-  ])
     .pipe(gulp.dest(`${CLONE_DIR}/android`));
 });
 
@@ -167,12 +152,17 @@ gulp.task('zero:setup:ios', () => {
     .pipe(gulp.dest(`${CLONE_DIR}/ios`));
 });
 
-gulp.task('zero:setup', sequence(
-  'zero:setup:cleanup',
-  'zero:setup:android',
-  'zero:setup:ios',
-  'zero:setup:general'
-));
+gulp.task('zero:setup:js', () => {
+  const { moduleName } = readConfigs('general');
+
+  gulp.src('./index.*.js')
+    .pipe(replace('ZeroProj', moduleName))
+    .pipe(gulp.dest(`${CLONE_DIR}`));
+
+  gulp.src('./app/**/*.js')
+    .pipe(replace('ZeroProj', moduleName))
+    .pipe(gulp.dest(`${CLONE_DIR}/app`));
+});
 
 gulp.task('zero:apply:git', () => {
   const { gitRemoteUrl } = readConfigs('general');
@@ -188,10 +178,17 @@ gulp.task('zero:apply:git', () => {
 
 gulp.task('zero:apply:platforms', () => (
   execCommands(
-    'rm -rf ./android ./ios',
-    `cp -r ${CLONE_DIR}/android .`,
-    `cp -r ${CLONE_DIR}/ios .`
+    'rm -rf ./ios',               // Remove ios folder to avoid duplications
+    `cp -r ${CLONE_DIR}/* .`
   )
+));
+
+gulp.task('zero:setup', sequence(
+  'zero:setup:cleanup',
+  'zero:setup:android',
+  'zero:setup:ios',
+  'zero:setup:js',
+  'zero:setup:general'
 ));
 
 gulp.task('zero:apply', sequence(
