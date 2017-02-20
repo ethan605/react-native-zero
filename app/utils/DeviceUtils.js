@@ -16,10 +16,21 @@ const PLATFORM_IS_IOS = (Platform.OS === 'ios');
 
 class DeviceUtils extends Singleton {
   androidLowLevelApi = ANDROID_LOW_LEVEL_API;
-  navigationBarHeight = Platform.select({ android : 54, ios: 44 });
   platformIsIOS = PLATFORM_IS_IOS;
   screen = { height, width };
+
+  navBarHeight = Platform.select({ android : 54, ios: 44 });
   statusBarHeight = ANDROID_LOW_LEVEL_API ? 0 : 20;
+
+  /**
+   * Padding from screen's top edge to the end of navigation bar
+   * Notes that for Android versions under 21, status bars are separated from nav bar (solid),
+   * while in higher versions of Android and iOS 6.0 & above,
+   * status bars are merged with nav bar
+   */
+  navBarPadding = ANDROID_LOW_LEVEL_API
+    ? this.navBarHeight
+    : this.navBarHeight + this.statusBarHeight;
 
   get buildInfo() {
     const bundleId = DeviceInfo.getBundleId();

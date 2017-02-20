@@ -21,8 +21,3 @@ React Native boilerplate project with highly customization via command line tool
 * [x] `singleton`
 * [x] `react-native-device-info`
 * [x] `react-native-vector-icons`
-
-## Versions
-
-- `react-native-cli`: `2.0.1`
-- `yarn`: `0.20.3`
