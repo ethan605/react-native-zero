@@ -4,9 +4,10 @@
 
 import React from 'react';
 import { Platform } from 'react-native';
-import { Router, Scene } from 'react-native-router-flux';
+import { Modal, Router, Scene } from 'react-native-router-flux';
 
 // Components
+import ErrorAlert from 'app/components/ErrorAlert';
 import FirstScene from 'app/components/FirstScene';
 import SecondScene from 'app/components/SecondScene';
 
@@ -14,18 +15,18 @@ import SecondScene from 'app/components/SecondScene';
 import RouterScenes from 'app/constants/RouterScenes';
 
 // Locals
-import animationStyle from './animationStyle';
-import createReducer from './createReducer';
-import { platformBasedPanHandlers } from './getPanHandlers';
-import renderTitle from './renderTitle';
+import {
+  animationStyle,
+  createReducer,
+  platformBasedPanHandlers,
+  renderBackButton,
+  renderTitle,
+} from 'app/components/Reusables/Router';
 import styles from './styles';
 
 const navigationBarBackgroundImage = require('app/assets/images/nav-bar-background.png');
 
-const {
-  FIRST_SCENE,
-  SECOND_SCENE,
-} = RouterScenes;
+const { ROOT, MODAL, FIRST, SECOND, ERROR } = RouterScenes;
 
 export default class AppRouter extends React.Component {
   componentDidMount() {
@@ -41,10 +42,8 @@ export default class AppRouter extends React.Component {
     };
   }
 
-  get navigationProps() {
+  get navigatorProps() {
     return {
-      // backButtonImage,
-      // drawerImage,
       renderTitle,
       leftButtonStyle: styles.navButton,
       navigationBarStyle: styles.navBar,
@@ -57,21 +56,25 @@ export default class AppRouter extends React.Component {
 
   render() {
     const firstSceneProps = {
-      ...this.navigationProps,
       component: FirstScene,
       title: 'ZeroProj',
     };
 
     const secondSceneProps = {
-      ...this.navigationProps,
+      renderBackButton,
       component: SecondScene,
       title: 'Something Fancy',
     };
 
     return (
       <Router {...this.routerProps}>
-        <Scene initial key={FIRST_SCENE} {...firstSceneProps} />
-        <Scene key={SECOND_SCENE} {...secondSceneProps} />
+        <Scene component={Modal} key={MODAL}>
+          <Scene key={ROOT} {...this.navigatorProps}>
+            <Scene initial key={FIRST} {...firstSceneProps} />
+            <Scene key={SECOND} {...secondSceneProps} />
+          </Scene>
+          <Scene key={ERROR} component={ErrorAlert} />
+        </Scene>
       </Router>
     );
   }

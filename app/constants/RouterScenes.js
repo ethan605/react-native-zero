@@ -3,11 +3,13 @@
  */
 
 // Root
-const ROOT_SCENE = 'rootScene';
+const ROOT = 'root';
+const MODAL = 'modal';
 
 // Scenes
-const FIRST_SCENE = 'firstScene';
-const SECOND_SCENE = 'secondScene';
+const FIRST = 'first';
+const SECOND = 'second';
+const ERROR = 'error';
 
 // Key suffixes
 const WRAPPER_KEY_SUFFIX = 'Wrapper';
@@ -17,10 +19,12 @@ const CONTENT_KEY_SUFFIX = 'Content';
 const POP_UP_KEY_SUFFIX = 'PopUp';
 
 export default {
-  ROOT_SCENE,
+  ROOT,
+  MODAL,
 
-  FIRST_SCENE,
-  SECOND_SCENE,
+  FIRST,
+  SECOND,
+  ERROR,
 
   // Key suffixes
   WRAPPER_KEY_SUFFIX,

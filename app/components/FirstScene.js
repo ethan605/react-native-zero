@@ -3,26 +3,33 @@
  */
 
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import Button from 'react-native-button';
 
 // Constants
 import RouterScenes from 'app/constants/RouterScenes';
 
 export default class FirstScene extends React.Component {
   onSecondScene = () => {
-    const { SECOND_SCENE } = RouterScenes;
-    Actions[SECOND_SCENE]();
+    const { SECOND } = RouterScenes;
+    Actions[SECOND]();
   };
+
+  onAlertError = () => {
+    const { ERROR } = RouterScenes;
+    Actions[ERROR]();
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={this.onSecondScene}>
-          <Text style={styles.welcome}>
-            Go to SecondScene
-          </Text>
-        </TouchableOpacity>
+        <Button onPress={this.onSecondScene}>
+          Go to SecondScene
+        </Button>
+        <Button onPress={this.onAlertError}>
+          Alert error
+        </Button>
       </View>
     );
   }
@@ -34,10 +41,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
   },
 });

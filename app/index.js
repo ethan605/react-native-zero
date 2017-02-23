@@ -33,7 +33,7 @@ class App extends React.Component {
 
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor={'transparent'} translucent barStyle={'light-content'} />
+        <StatusBar backgroundColor={'black'} translucent barStyle={'dark-content'} />
         <Provider store={store}>
           <AppRouter />
         </Provider>

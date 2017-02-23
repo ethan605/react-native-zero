@@ -14,6 +14,8 @@ You might get familiar with some other boilerplate tools out there, and this pro
 These are 3rd party packages that will also be integrated in your newly created project:
 
 * `lodash` (`^4.17.4`)
+* `react` (`~15.4.0`)
+* `react-native` (`0.41.2`)
 * `react-native-code-push` (`^1.17.0-beta`)
 * `react-native-device-info` (`^0.9.9`)
 * `react-native-router-flux` (`^3.37.0`)

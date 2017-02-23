@@ -2,26 +2,21 @@
  * @providesModule ZeroProj.Components.SecondScene
  */
 
+/* eslint-disable no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+/* eslint-enable no-unused-vars */
+import { StyleSheet, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import Button from 'react-native-button';
 
-export default class SecondScene extends React.Component {
-  onBack = () => {
-    Actions.pop();
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity onPress={this.onBack}>
-          <Text style={styles.welcome}>
-            Back to FirstScene
-          </Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+export default function SecondScene() {
+  return (
+    <View style={styles.container}>
+      <Button onPress={Actions.pop}>
+        Back to FirstScene
+      </Button>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -30,10 +25,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
   },
 });
