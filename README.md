@@ -31,7 +31,7 @@ Simply following these steps:
 ### 1. Clone this project (don't worry about git configs, it can be configured later)
 
 ```shell
-git clone git@github.com:ethan605/react-native-zero
+git clone git@github.com:ethan605/react-native-zero.git
 ```
 
 ### 2. Install NodeJS modules using `yarn`
