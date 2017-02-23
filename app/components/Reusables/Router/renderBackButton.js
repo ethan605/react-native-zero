@@ -16,8 +16,8 @@ import DeviceUtils from 'app/utils/DeviceUtils';
 
 export default function renderBackButton() {
   const backIcon = Platform.select({
-    android: <MaterialIcons color="white" name="arrow-back" size={30} />,
-    ios: <Entypo color="white" name="chevron-left" size={35} />,
+    android: <MaterialIcons color="black" name="arrow-back" size={30} />,
+    ios: <Entypo color="black" name="chevron-left" size={35} />,
   });
 
   return (

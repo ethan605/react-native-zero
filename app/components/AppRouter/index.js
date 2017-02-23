@@ -37,8 +37,6 @@ export default class AppRouter extends React.Component {
       animationStyle,
       createReducer,
       passProps: true,
-      sceneStyle: styles.navScenes,
-      ...platformBasedPanHandlers,
     };
   }
 
