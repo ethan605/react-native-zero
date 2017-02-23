@@ -17,6 +17,7 @@
 		"zero": "gulp zero:setup; gulp zero:apply"
 	},
 	"dependencies": {
+		"lodash": "^4.17.4",
 		"react": "~15.4.0",
 		"react-native": "0.41.2",
 		"react-native-code-push": "^1.17.0-beta",
