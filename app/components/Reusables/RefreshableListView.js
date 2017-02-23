@@ -6,7 +6,7 @@ import React from 'react';
 import { ListView, RefreshControl } from 'react-native';
 import _ from 'lodash';
 
-export default class RefreshableListView extends React.Component {
+export default class RefreshableListView extends React.PureComponent {
   static propTypes = {
     onError: React.PropTypes.func,
     onFetchData: React.PropTypes.func.isRequired,

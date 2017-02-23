@@ -9,7 +9,7 @@ import { Actions } from 'react-native-router-flux';
 const DEFAULT_DURATION = 200;
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
-export default class PopUp extends React.Component {
+export default class PopUp extends React.PureComponent {
   static propTypes = {
     backgroundColor: PropTypes.string,
     children: PropTypes.any,

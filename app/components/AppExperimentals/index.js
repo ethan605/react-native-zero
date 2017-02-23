@@ -18,7 +18,7 @@ if (FEATURES.GLOBAL_MODULES) {
   });
 }
 
-class AppExperimentals extends React.Component {
+class AppExperimentals extends React.PureComponent {
   componentDidMount() {
   }
 

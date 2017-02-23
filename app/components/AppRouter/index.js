@@ -24,14 +24,9 @@ import {
 } from 'app/components/Reusables/Router';
 import styles from './styles';
 
-const navigationBarBackgroundImage = require('app/assets/images/nav-bar-background.png');
-
 const { ROOT, MODAL, FIRST, SECOND, ERROR } = RouterScenes;
 
-export default class AppRouter extends React.Component {
-  componentDidMount() {
-  }
-
+export default class AppRouter extends React.PureComponent {
   get routerProps() {
     return {
       animationStyle,
@@ -48,21 +43,12 @@ export default class AppRouter extends React.Component {
       sceneStyle: styles.navScenes,
       titleStyle: styles.navTitle,
       ...platformBasedPanHandlers(),
-      ...Platform.select({ ios: { navigationBarBackgroundImage } }),
     };
   }
 
   render() {
-    const firstSceneProps = {
-      component: FirstScene,
-      title: 'ZeroProj',
-    };
-
-    const secondSceneProps = {
-      renderBackButton,
-      component: SecondScene,
-      title: 'Something Fancy',
-    };
+    const firstSceneProps = { component: FirstScene, title: 'ZeroProj' };
+    const secondSceneProps = { renderBackButton, component: SecondScene, title: 'Something Fancy' };
 
     return (
       <Router {...this.routerProps}>
@@ -71,7 +57,7 @@ export default class AppRouter extends React.Component {
             <Scene initial key={FIRST} {...firstSceneProps} />
             <Scene key={SECOND} {...secondSceneProps} />
           </Scene>
-          <Scene key={ERROR} component={ErrorAlert} />
+          <Scene component={ErrorAlert} key={ERROR} />
         </Scene>
       </Router>
     );
