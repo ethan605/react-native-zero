@@ -134,6 +134,10 @@ npm run ios-debug         # Build & run iOS app in Debug mode
 npm run ios-release       # Build & run iOS app in Release mode
 ```
 
+Notes: for iOS, there's missing `ios-staging` script, because `react-native-cli` accepts a `configuration` param to be passed throw `react-native run-ios` command, but our iOS Staging app is built & placed under `Production-iphonesimulator` or `Production-iphoneos` directory, so all the build processes using `react-native-cli` works fine until failed when installing & running in Simulators or Devices.
+
+To workaround this problem, please open the Xcode project and select `<moduleName>-Staging` scheme, build & run as normal. This is the only task that can't be done in command line, hope that React Native could solve this soon.
+
 ### CodePush scripts
 
 #### Check deployment history
