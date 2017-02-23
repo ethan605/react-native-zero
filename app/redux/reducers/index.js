@@ -4,10 +4,10 @@
 
 import { combineReducers } from 'redux';
 
-import authStates from './auth';
+import auth from './auth';
 
 const reducers = combineReducers({
-  auth: authStates,
+  auth,
 });
 
 export default reducers;
