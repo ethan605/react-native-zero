@@ -5,7 +5,13 @@ React Native boilerplate project with highly customization via command line tool
 
 `react-native-zero` is a template / boilerplate / starting-kit to help developers initialize new React Native projects a most robust & cleanest way.
 
-3rd party packages will be integrated in your newly created project:
+## Why I have to use this?
+
+You might get familiar with some other boilerplate tools out there, and this project isn't desire to change your habits. Just consider it's another way to start your new & awesome React Native app, which do the most of boring tasks automatically & highly configurable.
+
+## What is already contained in this project?
+
+These are 3rd party packages that will also be integrated in your newly created project:
 
 * `lodash` (`^4.17.4`)
 * `react-native-code-push` (`^1.17.0-beta`)
@@ -16,9 +22,7 @@ React Native boilerplate project with highly customization via command line tool
 * `redux` (`^3.6.0`)
 * `singleton` (`^1.0.0`)
 
-## Why I have to use this?
-
-You might get familiar with some other boilerplate tools out there, and this project isn't desire to change your habits. Just consider it's another way to start your new & awesome React Native app, which do the most of boring tasks automatically & highly configurable.
+Besides that, to conform AirBnb's [**JavaScript & React style guides**](https://github.com/airbnb/javascript/tree/master/), all neccessary rules are configured in `.eslintrc.json`. You can use this with whatever ESLint tools (like `SublimeLinter` for Sublime Text or `ESLint` for Visual Studio Code,...) to highlight invalid syntaxes in your codebase.
 
 ## How can I use this?
 
@@ -74,7 +78,7 @@ This will be used to replace with your main `package.json`'s `"name"` key.
 
 React Native use a **module name** to connect between native code (`MainActivity.java` for Android & `AppDelegate.m` for iOS) and JavaScript code (`index.android.js` & `index.ios.js` for Android & iOS respectively). This should be in `PascalCase`, human readable & unique with other applications.
 
-`moduleName` will also be used as your app's name to be displayed on devices. See more about app names in [`codepush`: `release` and `staging` key](#codepush-release-and-staging-key) section.
+`moduleName` will also be used as your app's name to be displayed on devices & `appName` section in CodePush commands. See more about this in [`codepush`: `release` and `staging` key](#codepush-release-and-staging-key) & [Preset Node scripts](#preset-node-scripts).
 
 Plus, this project uses NodeJS's `@providesModule` declaration in header of each JavaScript file, which has format of `<moduleName>.something.ClassName`. Config this field uniquely will avoid naming collisions between your installed module names.
 
@@ -104,3 +108,64 @@ The `signingConfigs` options is configured to conform React Native's offical doc
 #### `ios` options
 
 There's only `bundleId` to be configured in iOS. Please note that we separate Android & iOS app IDs to enables your absolute control on this section.
+
+### 4. Run setup task to make changes
+
+```shell
+npm run zero
+```
+
+## Preset Node scripts
+
+This project contains several preset Node scripts (can be found under `"script"` section of the main `package.json`)
+
+### General scripts
+
+```shell
+npm start                 # Start React Native packager
+
+npm run lint              # Check all code syntax under app/ directory using ESLint
+
+npm run android-debug     # Build & run Android app in Debug mode
+npm run android-release   # Build & run Android app in Release mode
+npm run android-staging   # Build & run Android app in Staging mode
+
+npm run ios-debug         # Build & run iOS app in Debug mode
+npm run ios-release       # Build & run iOS app in Release mode
+```
+
+### CodePush scripts
+
+#### Check deployment history
+
+```shell
+npm run codepush-check -- Staging           # Staging deployments
+npm run codepush-check -- Production        # Production deployments
+```
+
+#### Build & release new CodePush update
+
+Once you've done with your new features (without adding new native libraries), there's few more steps to release them via CodePush.
+
+Firstly, configure all the neccessary information under `./gulp-helpers/codepush/configs.json`:
+
+```json
+{
+  "appName": "<your moduleName>",
+  "buildNumber": "1",
+  "deploymentName": "Staging",
+  "versionName": "1.0.0"
+}
+```
+
+Then bundle & release with single command:
+
+```shell
+npm run codepush-release
+```
+
+Notes that you can run this task with `--dry` flag to test whether the information is valid. There's no actual effects made, just output all the commands that will be executed:
+
+```shell
+npm run codepush-release -- --dry
+```

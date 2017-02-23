@@ -7,11 +7,11 @@
 		"test": "jest",
 		"lint": "eslint app/",
 		"android-debug": "react-native run-android --variant debug",
-		"android-staging": "react-native run-android --variant releaseStaging",
 		"android-release": "react-native run-android --variant release",
+		"android-staging": "react-native run-android --variant releaseStaging",
 		"ios-debug": "react-native run-ios --configuration Debug",
-		"ios-staging": "echo 'Run from Xcode instead'",
 		"ios-release": "react-native run-ios --configuration Release",
+		"ios-staging": "echo 'Run from Xcode instead'",
 		"codepush-check": "code-push deployment history ZeroProj",
 		"codepush-release": "gulp codepush:release",
 		"zero": "gulp zero:setup; gulp zero:apply"
