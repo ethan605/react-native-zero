@@ -31,7 +31,8 @@ export default class RefreshableListView extends React.PureComponent {
     this.onError = onError && onError.bind(this);
     this.onFetchData = onFetchData && onFetchData.bind(this);
 
-    this.isMounted = false;
+    // Component.isMounted is deprecated, this is a workaround
+    this.mounted = false;
   }
 
   state = {
@@ -43,7 +44,7 @@ export default class RefreshableListView extends React.PureComponent {
   };
 
   componentDidMount() {
-    this.isMounted = true;
+    this.mounted = true;
     
     // Initialize data list with placholders
     this.reset();
@@ -55,7 +56,7 @@ export default class RefreshableListView extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    this.isMounted = false;
+    this.mounted = false;
   }
 
   get defaultDataSource() {
@@ -157,7 +158,7 @@ export default class RefreshableListView extends React.PureComponent {
   };
 
   updateStates = (newState, callback) => {
-    if (!this.isMounted) return;
+    if (!this.mounted) return;
     this.setState(newState, callback != null ? callback : undefined);
   }
 

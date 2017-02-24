@@ -3,18 +3,12 @@
  */
 
 import React from 'react';
-import { Platform } from 'react-native';
 import { Modal, Router, Scene } from 'react-native-router-flux';
 
 // Components
 import ErrorAlert from 'app/components/ErrorAlert';
 import FirstScene from 'app/components/FirstScene';
 import SecondScene from 'app/components/SecondScene';
-
-// Constants
-import RouterScenes from 'app/constants/RouterScenes';
-
-// Locals
 import {
   animationStyle,
   createReducer,
@@ -22,6 +16,11 @@ import {
   renderBackButton,
   renderTitle,
 } from 'app/components/Reusables/Router';
+
+// Constants
+import RouterScenes from 'app/constants/RouterScenes';
+
+// Locals
 import styles from './styles';
 
 const { ROOT, MODAL, FIRST, SECOND, ERROR } = RouterScenes;
