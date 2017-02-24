@@ -2,7 +2,7 @@
  * @providesModule ZeroProj.Components.Reusables.PopUp
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Animated, Dimensions, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
@@ -11,13 +11,13 @@ const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 export default class PopUp extends React.PureComponent {
   static propTypes = {
-    backgroundColor: PropTypes.string,
-    children: PropTypes.any,
-    duration: PropTypes.number,
-    fade: PropTypes.bool,
-    onDismiss: PropTypes.func,
-    tapToDismiss: PropTypes.bool,
-    topDown: PropTypes.bool,
+    backgroundColor: React.PropTypes.string,
+    children: React.PropTypes.any,
+    duration: React.PropTypes.number,
+    fade: React.PropTypes.bool,
+    onDismiss: React.PropTypes.func,
+    tapToDismiss: React.PropTypes.bool,
+    topDown: React.PropTypes.bool,
   };
 
   static defaultProps = {

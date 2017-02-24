@@ -17,6 +17,7 @@ export default class RefreshableListView extends React.PureComponent {
   };
 
   static defaultProps = {
+    onError: null,
     paginationEnabled: true,
     placeholderData: {},
     refreshControlEnabled: true,
@@ -27,9 +28,10 @@ export default class RefreshableListView extends React.PureComponent {
     super(props);
 
     const { onFetchData, onError } = props;
-
-    this.onFetchData = onFetchData && onFetchData.bind(this);
     this.onError = onError && onError.bind(this);
+    this.onFetchData = onFetchData && onFetchData.bind(this);
+
+    this.isMounted = false;
   }
 
   state = {
@@ -41,7 +43,7 @@ export default class RefreshableListView extends React.PureComponent {
   };
 
   componentDidMount() {
-    this.mounted = true;
+    this.isMounted = true;
     
     // Initialize data list with placholders
     this.reset();
@@ -53,10 +55,8 @@ export default class RefreshableListView extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    this.mounted = false;
+    this.isMounted = false;
   }
-
-  mounted = false;
 
   get defaultDataSource() {
     return new ListView.DataSource({
@@ -69,19 +69,12 @@ export default class RefreshableListView extends React.PureComponent {
 
   // Reset all contents
   reset = () => {
-    const newState = {
-      currentPage: 1,
-      isLoading: true,
-    };
-
+    const newState = { currentPage: 1, isLoading: true };
     this.updateStates(newState, this.reloadData);
   };
 
   renderRefreshControl = () => (
-    <RefreshControl
-      refreshing={this.state.isRefresing}
-      onRefresh={this.refreshData}
-    />
+    <RefreshControl refreshing={this.state.isRefresing} onRefresh={this.refreshData} />
   );
 
   reloadData = () => {
@@ -116,12 +109,7 @@ export default class RefreshableListView extends React.PureComponent {
 
   // Pull to refresh
   refreshData = () => {
-    const newState = {
-      currentPage: 1,
-      isRefresing: true,
-      isLoading: true,
-    };
-
+    const newState = { currentPage: 1, isRefresing: true, isLoading: true };
     this.updateStates(newState, this.fetchData);
   };
 
@@ -132,11 +120,7 @@ export default class RefreshableListView extends React.PureComponent {
     if (isLoading || isLastPageReached)
       return;
 
-    const newState = {
-      currentPage: this.state.currentPage + 1,
-      isLoading: true,
-    };
-
+    const newState = { currentPage: this.state.currentPage + 1, isLoading: true };
     this.updateStates(newState, this.fetchData);
   };
 
@@ -155,16 +139,12 @@ export default class RefreshableListView extends React.PureComponent {
 
   mergeData = (original, updated) => {
     const mergedData = {};
-    const allKeys = _.uniq(Object.keys(original).concat(Object.keys(updated)));
+    const allKeys = _.uniq(_.concat(Object.keys(original), Object.keys(updated)));
 
     allKeys.forEach(key => {
       const originalData = original[key] || [];
       const updatedData = updated[key] || [];
-
-      if (originalData.length === 0 && updatedData.length === 0)
-        return;
-
-      mergedData[key] = originalData.concat(updatedData);
+      mergedData[key] = _.concat(originalData, updatedData);
     });
 
     return mergedData;
@@ -172,30 +152,22 @@ export default class RefreshableListView extends React.PureComponent {
 
   resetStates = isLastPage => {
     const lastPageState = isLastPage == null ? {} : { isLastPageReached: isLastPage };
-    const newState = {
-      isLoading: false,
-      isRefresing: false,
-      ...lastPageState,
-    };
-
+    const newState = { isLoading: false, isRefresing: false, ...lastPageState };
     this.updateStates(newState);
   };
 
   updateStates = (newState, callback) => {
-    if (!this.mounted) return;
+    if (!this.isMounted) return;
     this.setState(newState, callback != null ? callback : undefined);
   }
 
   render() {
     const { paginationEnabled, refreshControlEnabled } = this.props;
 
-    const refreshProps = refreshControlEnabled ? {
-      refreshControl: this.renderRefreshControl(),
-    } : {};
-
-    const paginationProps = paginationEnabled ? {
-      onEndReached: this.pullMoreData,
-    } : {};
+    const refreshProps = refreshControlEnabled
+      ? { refreshControl: this.renderRefreshControl() } : null;
+    const paginationProps = paginationEnabled
+      ? { onEndReached: this.pullMoreData } : null;
 
     return (
       <ListView
