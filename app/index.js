@@ -12,8 +12,11 @@ import { Provider } from 'react-redux';
 import AppExperimentals from './components/AppExperimentals';
 import AppRouter from './components/AppRouter';
 
+// Controllers
+import StaticDataAdapter from './controllers/StaticDataAdapter';
+
 // Constants
-import { FEATURES } from './constants/Flags';
+import { FEATURES } from 'app/constants/Flags';
 
 // Redux
 import store from './redux/store';
@@ -23,21 +26,22 @@ const CODEPUSH_OPTIONS = {
   installMode: CodePush.InstallMode.IMMEDIATE,
 };
 
-class App extends React.Component {
+class App extends React.PureComponent {
   componentDidMount() {
+    // Do app-wide actions like hiding splash screen, etc...
   }
 
   render() {
-    if (FEATURES.APP_EXPERIMENTALS)
-      return <AppExperimentals />;
+    const AppCore = FEATURES.APP_EXPERIMENTALS ? AppExperimentals : AppRouter;
 
     return (
-      <View style={styles.container}>
-        <StatusBar backgroundColor="transparent" translucent barStyle="light-content" />
-        <Provider store={store}>
-          <AppRouter />
-        </Provider>
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          <StatusBar backgroundColor={'transparent'} translucent barStyle={'light-content'} />
+          <StaticDataAdapter />
+          <AppCore />
+        </View>
+      </Provider>
     );
   }
 }
