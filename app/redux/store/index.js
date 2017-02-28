@@ -4,18 +4,16 @@
 
 /* eslint-disable no-underscore-dangle */
 
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
 import reducers from '../reducers';
 
-// export default createStore(
-//   reducers,
-//   undefined,
-//   applyMiddleware(),
-// );
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default createStore(
   reducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeEnhancer(applyMiddleware(
+    // Redux middleware
+  ))
 );
 
 /* eslint-enable no-underscore-dangle */
