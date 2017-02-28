@@ -16,11 +16,7 @@ import FontUtils from 'app/utils/FontUtils';
 
 export default function ErrorAlert() {
   return (
-    <PopUp
-      backgroundColor="white"
-      ref={ref => this.popUp = ref}
-      tapToDismiss
-    >
+    <PopUp backgroundColor="white" ref={ref => this.popUp = ref} tapToDismiss>
       <View style={styles.container}>
         <Text style={styles.instructionsText}>This is an error!</Text>
         <Text style={styles.instructionsText}>(Can be tapped to dismiss)</Text>
