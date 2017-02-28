@@ -5,11 +5,9 @@
 import { STATIC_DATA } from '../types';
 
 const DEFAULT_STATES = {
-  /**
-   * Data keys & default values. E.g.:
-   *  configs: {},
-   *  countries: [],
-   */
+  // Data keys & default values. E.g.:
+  cities: [],
+  remoteConfigs: {},
 
   // Fetch triggers
   fetchCounter: 0,

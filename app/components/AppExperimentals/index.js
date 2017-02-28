@@ -5,6 +5,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Button from 'react-native-button';
+import moment from 'moment';
 import _ from 'lodash';
 
 // Constants
@@ -19,6 +20,7 @@ import withConnect from './withConnect';
 
 if (FEATURES.GLOBAL_MODULES) {
   Object.assign(global, {
+    moment,
     _,
   });
 }

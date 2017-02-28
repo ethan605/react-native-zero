@@ -2,14 +2,20 @@
  * @providesModule ZeroProj.Redux.Store
  */
 
-import { applyMiddleware, createStore } from 'redux';
+/* eslint-disable no-underscore-dangle */
 
+import { applyMiddleware, createStore } from 'redux';
 import reducers from '../reducers';
 
-const store = createStore(
+// export default createStore(
+//   reducers,
+//   undefined,
+//   applyMiddleware(),
+// );
+
+export default createStore(
   reducers,
-  undefined,
-  applyMiddleware(),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-export default store;
+/* eslint-enable no-underscore-dangle */

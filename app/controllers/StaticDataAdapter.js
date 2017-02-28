@@ -46,15 +46,15 @@ class StaticDataAdapter extends React.PureComponent {
 
   loadLocalData = () => {
     this.onDataUpdated({
-      // Load local data & update here (stored in AsyncStorage or raw JSON files)
+      // Load local data & update here (stored in AsyncStorage or raw JSON files). E.g.:
+      cities: ['Hanoi', 'Da Nang', 'Ho Chi Minh City'],
     });
   };
 
   fetchRemoteData = async (/* keys */) => {
     try {
-      this.onDataUpdated({
-        // Fetch remote data & update here
-      });
+      // Fetch remote data & update here
+      // this.onDataUpdated({});
     } catch (error) { throw error; }
   };
 
