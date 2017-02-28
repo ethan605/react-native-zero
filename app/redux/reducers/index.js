@@ -5,9 +5,6 @@
 import { combineReducers } from 'redux';
 
 import auth from './auth';
+import staticData from './staticData';
 
-const reducers = combineReducers({
-  auth,
-});
-
-export default reducers;
+export default combineReducers({ auth, staticData });

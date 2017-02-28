@@ -2,19 +2,20 @@
  * @providesModule ZeroProj.Redux.Reducers.Auth
  */
 
-import { ACCESS_LEVELS } from '../constants';
 import { AUTH } from '../types';
 
 const DEFAULT_STATES = {
-  accessLevel: ACCESS_LEVELS.APP_NOT_LOADED,
+  userData: null,
 };
 
-export default function auth(state = DEFAULT_STATES, action) {
-  if (action.type === AUTH.CHANGE_ACCESS_LEVEL)
-    return {
-      ...state,
-      accessLevel: action.accessLevel,
-    };
+export default function authReducer(state = DEFAULT_STATES, action) {
+  if (action.type === AUTH.AUTHORIZED) {
+    const { userData } = action;
+    return { ...state, userData };
+  }
+
+  if (action.type === AUTH.DEAUTHORIZED)
+    return { ...state, userData: null };
 
   return state;
 }

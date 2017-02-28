@@ -2,17 +2,7 @@
  * @providesModule ZeroProj.Redux.Actions
  */
 
-import {
-  changeAccessLevel,
-  signInWithPassword,
-  signInWithProvider,
-  signOut,
-} from './auth';
+import * as auth from './auth';
+import * as staticData from './staticData';
 
-// Auth actions
-export {
-  changeAccessLevel,
-  signInWithPassword,
-  signInWithProvider,
-  signOut,
-};
+export { auth, staticData };

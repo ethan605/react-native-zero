@@ -8,10 +8,7 @@ import _ from 'lodash';
 const EMAIL = 'email';
 const PASSWORD = 'password';
 
-export const DATA_TYPES = {
-  EMAIL,
-  PASSWORD,
-};
+export const DATA_TYPES = { EMAIL, PASSWORD };
 
 const PATTERNS = {
   [EMAIL]: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/ig,
@@ -19,18 +16,18 @@ const PATTERNS = {
 };
 
 class ValidationUtils extends Singleton {
-  validate(inputData, dataType, { emptyMessage, invalidMessage } = {}) {
+  validate(inputData, dataType, { forEmpty, forInvalid } = {}) {
     if (_.isEmpty(inputData))
-      return emptyMessage;
+      return forEmpty;
 
     const pattern = PATTERNS[dataType];
     if (pattern == null)
-      return invalidMessage;
+      return forInvalid;
 
     const matches = inputData.match(pattern);
 
     if (matches == null || matches[0] !== inputData)
-      return invalidMessage;
+      return forInvalid;
 
     return null;
   }
