@@ -8,38 +8,31 @@ import _ from 'lodash';
 // Utils
 import Logger from 'app/utils/Logger';
 
+function normalizedData(data, validatorList) {
+  if (_.isEmpty(data))
+    return {
+      error: Error(`${this.name} model constructed with empty data`),
+      normalized: {},
+    };
+
+  const attributes = Object.keys(validatorList);
+  const validator = Joi.object().keys(validatorList);
+
+  const filteredData = _.pick(data, attributes);
+  const { error, value } = Joi.validate(filteredData, validator);
+
+  const normalized = error != null ? filteredData : value;
+  return { error, normalized };
+}
+
 export default class BaseModel {
   static dataValidator() {
     // Raise error if this method is absent from descendant class
     throw new Error('[BaseModel]: dataValidator() function must be provided');
   }
 
-  static normalizedData(data) {
-    if (_.isEmpty(data))
-      return {
-        error: Error(`${this.name} model constructed with empty data`),
-        normalized: {},
-      };
-
-    const validatorList = this.dataValidator();
-    const attributes = Object.keys(validatorList);
-    const validator = Joi.object().keys(validatorList);
-
-    const filteredData = _.pick(data, attributes);
-
-    const { error, value } = Joi.validate(filteredData, validator);
-
-    if (error != null)
-      return { normalized: filteredData, error };
-
-    return {
-      normalized: value,
-      error,
-    };
-  }
-
   static build(data) {
-    const { normalized, error } = this.normalizedData(data);
+    const { error, normalized } = normalizedData(data, this.dataValidator());
 
     if (_.isEmpty(normalized)) {
       Logger.warn(error.message);
@@ -56,7 +49,7 @@ export default class BaseModel {
 
   static construct(data) {
     // Ignore errors
-    const { normalized } = this.normalizedData(data);
+    const { normalized } = normalizedData(data, this.dataValidator());
     return new (this)(normalized);
   }
 
