@@ -3,19 +3,34 @@
  */
 
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Button from 'react-native-button';
 import _ from 'lodash';
 
 // Constants
 import { FEATURES } from 'app/constants/Flags';
 
 // Utils
+import FontUtils from 'app/utils/FontUtils';
 import Logger from 'app/utils/Logger';
+
+// Locals
+import withConnect from './withConnect';
 
 if (FEATURES.GLOBAL_MODULES) {
   Object.assign(global, {
     _,
   });
+}
+
+function Welcome({ onPress }) {
+  return (
+    <View style={styles.container}>
+      <Button onPress={onPress} style={styles.welcomeText}>
+        Make some experiments!
+      </Button>
+    </View>
+  );
 }
 
 class AppExperimentals extends React.PureComponent {
@@ -27,15 +42,7 @@ class AppExperimentals extends React.PureComponent {
   };
 
   render() {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity onPress={this.onPress}>
-          <Text style={styles.welcome}>
-            ZeroProj AppExperimentals!
-          </Text>
-        </TouchableOpacity>
-      </View>
-    );
+    return <Welcome onPress={this.onPress} />;
   }
 }
 
@@ -44,13 +51,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#3b5998',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
+  welcomeText: FontUtils.build({
+    align: 'center',
+    color: 'white',
+    size: 20,
+    weight: FontUtils.weights.bold,
+  }),
 });
 
-export default AppExperimentals;
+export default withConnect(AppExperimentals);
