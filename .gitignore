@@ -57,3 +57,5 @@ CodePushRelease/
 __cloned__
 .vscode/
 jsconfig.json
+
+ios/Vendors/*.framework
