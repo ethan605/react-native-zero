@@ -4625,6 +4625,10 @@ react-native-experimental-navigation@0.26.x:
     fbjs "^0.8.1"
     react-addons-pure-render-mixin "^15.0.2"
 
+react-native-fcm@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-fcm/-/react-native-fcm-6.1.0.tgz#aa05831a10c33bf61f4d5657f5e48289900a19ff"
+
 react-native-joi@^0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/react-native-joi/-/react-native-joi-0.0.5.tgz#de31cc381f916e62442988de38807cfcf36b5de3"

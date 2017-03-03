@@ -24,6 +24,7 @@
 		"react-native-button": "^1.8.2",
 		"react-native-code-push": "^1.17.0-beta",
 		"react-native-device-info": "^0.9.9",
+		"react-native-fcm": "^6.1.0",
 		"react-native-joi": "^0.0.5",
 		"react-native-router-flux": "^3.37.0",
 		"react-native-vector-icons": "^4.0.0",
