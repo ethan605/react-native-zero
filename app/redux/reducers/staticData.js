@@ -2,39 +2,22 @@
  * @providesModule ZeroProj.Redux.Reducers.StaticData
  */
 
-import { STATIC_DATA } from '../types';
+import { AXIOS_REQUEST_SUFFIXES } from '../constants';
+import { SERVICE_API, STATIC_DATA } from '../types';
 
-const DEFAULT_STATES = {
-  // Data keys & default values. E.g.:
-  cities: [],
-  remoteConfigs: {},
-
-  // Fetch triggers
-  fetchCounter: 0,
-  fetchKeys: {},
-};
+const DEFAULT_STATES = {};
 
 export default function staticDataReducer(state = DEFAULT_STATES, action) {
-  if (action.type === STATIC_DATA.FETCH) {
-    const { fetchCounter } = state;
-    const { keys } = action;
-
-    // Trigger data fetching by increasing counter
-    return {
-      ...state,
-      fetchCounter: fetchCounter + 1,
-      fetchKeys: keys,
-    };
+  const { type } = action;
+  
+  if (type === SERVICE_API.GET_STATIC_DATA + AXIOS_REQUEST_SUFFIXES.SUCCESS) {
+    const { data } = action.payload;
+    return { ...state, ...data };
   }
-
-  if (action.type === STATIC_DATA.UPDATED) {
-    const { partials } = action;
-
-    return {
-      ...state,
-      ...partials,
-      fetchKeys: {},      // clear fetchKeys to avoid mis-used cases
-    };
+  
+  if (type === STATIC_DATA.UPDATED) {
+    const { payload } = action;
+    return { ...state, ...payload };
   }
 
   return state;

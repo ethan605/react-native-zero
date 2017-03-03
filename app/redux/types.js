@@ -2,14 +2,19 @@
  * @providesModule ZeroProj.Redux.Types
  */
 
-// Auth action types
 export const AUTH = {
-  AUTHORIZED:           'AUTHORIZED',
-  DEAUTHORIZED:         'DEAUTHORIZED',
+  AUTHORIZE:            'AUTH:AUTHORIZE',
+  DEAUTHORIZE:          'AUTH:DEAUTHORIZE',
 };
 
-// Static data action types
+export const SERVICE_API = {
+  GET_STATIC_DATA:      'SERVICE_API:GET_STATIC_DATA',
+};
+
+export const SHARED = {
+  RESET_REDUX_STORE:    'RESET_REDUX_STORE',
+};
+
 export const STATIC_DATA = {
-  FETCH:                'FETCH',
-  UPDATED:              'UPDATED',
+  DATA_UPDATED:         'STATIC_DATA:DATA_UPDATED',
 };

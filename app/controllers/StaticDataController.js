@@ -4,58 +4,46 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 
 // Redux
-import { staticData } from 'app/redux/actions';
+import { /* serviceApi, */ staticData } from 'app/redux/actions';
+
+// Utils
+// import Logger from 'app/utils/Logger';
 
 function mapStateToProps(state) {
-  return { ...state.staticData };
+  const { rehydrated } = state.shared;
+  return { ...state.staticData, rehydrated };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    onDataUpdated: partials => dispatch(staticData.updated(partials)),
+    onDataUpdated: partials => dispatch(staticData.dataUpdated(partials)),
   };
 }
 
 class StaticDataController extends React.PureComponent {
   static propTypes = {
-    // Define data validations here
+    rehydrated: React.PropTypes.bool.isRequired,
   };
 
   constructor(props) {
     super(props);
-    
     this.onDataUpdated = this.props.onDataUpdated.bind(this);
   }
 
-  componentWillMount() {
-    this.loadLocalData();
-    this.fetchRemoteData();
-  }
-
   componentWillReceiveProps(nextProps) {
-    const { fetchCounter } = this.props;
-    const { fetchCounter: nextFetchCounter, fetchKeys } = nextProps;
-
-    // Force data fetching from any where connected
-    if (fetchCounter < nextFetchCounter && !_.isEmpty(fetchKeys))
-      this.fetchRemoteData(fetchKeys);
+    const { rehydrated } = this.props;
+    
+    if (nextProps.rehydrated && !rehydrated)
+      this.loadAndFetchAllData();
   }
 
-  loadLocalData = () => {
-    this.onDataUpdated({
-      // Load local data & update here (stored in AsyncStorage or raw JSON files). E.g.:
-      cities: ['Hanoi', 'Da Nang', 'Ho Chi Minh City'],
-    });
-  };
+  loadAndFetchAllData = () => {
+    // Load local data
+    // this.onDataUpdated({ ... });
 
-  fetchRemoteData = async (/* keys */) => {
-    try {
-      // Fetch remote data & update here
-      // this.onDataUpdated({});
-    } catch (error) { throw error; }
+    // Fetch remote data
   };
 
   render() {

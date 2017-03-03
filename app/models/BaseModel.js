@@ -35,7 +35,7 @@ export default class BaseModel {
     const { error, normalized } = normalizedData(data, this.dataValidator());
 
     if (_.isEmpty(normalized)) {
-      Logger.warn(error.message);
+      // Logger.warn(error.message);
       return null;
     }
 

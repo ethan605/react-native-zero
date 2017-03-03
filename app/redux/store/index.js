@@ -5,20 +5,33 @@
 /* eslint-disable no-underscore-dangle */
 
 import { applyMiddleware, createStore, compose } from 'redux';
-import reducers from '../reducers';
+import { autoRehydrate } from 'redux-persist';
+import reduxReset from 'redux-reset';
+import reduxThunk from 'redux-thunk';
 
-/**
- * Configure to work with `redux-devtools-extensions` & `react-native-debugger`
- * https://github.com/jhen0409/react-native-debugger
- * https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup
- */
+// Constants
+import { DEBUGS } from 'app/constants/Flags';
+
+// Locals
+import reducers from '../reducers';
+import { RESET_REDUX_STORE } from '../types';
+
+import axiosMiddleware from './axiosMiddleware';
+import createStorePersistor from './createStorePersistor';
+
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default createStore(
+const store = createStore(
   reducers,
-  composeEnhancer(applyMiddleware(
-    // Redux middleware
-  ))
+  composeEnhancer(
+    applyMiddleware(reduxThunk, axiosMiddleware),
+    autoRehydrate({ log: DEBUGS.REDUX_PERSIST }),
+    reduxReset(RESET_REDUX_STORE)
+  )
 );
+
+createStorePersistor(store);
+
+export default store;
 
 /* eslint-enable no-underscore-dangle */

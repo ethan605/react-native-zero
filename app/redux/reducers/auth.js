@@ -9,12 +9,12 @@ const DEFAULT_STATES = {
 };
 
 export default function authReducer(state = DEFAULT_STATES, action) {
-  if (action.type === AUTH.AUTHORIZED) {
-    const { userData } = action;
-    return { ...state, userData };
+  if (action.type === AUTH.AUTHORIZE) {
+    const { payload } = action;
+    return { ...state, userData: payload };
   }
 
-  if (action.type === AUTH.DEAUTHORIZED)
+  if (action.type === AUTH.DEAUTHORIZE)
     return { ...state, userData: null };
 
   return state;

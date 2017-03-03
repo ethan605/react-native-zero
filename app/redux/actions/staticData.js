@@ -2,12 +2,7 @@
  * @providesModule ZeroProj.Redux.Actions.StaticData
  */
 
+import { createAction } from 'redux-actions';
 import { STATIC_DATA } from '../types';
 
-export function fetch(keys) {
-  return { type: STATIC_DATA.FETCH, keys };
-}
-
-export function updated(partials) {
-  return { type: STATIC_DATA.UPDATED, partials };
-}
+export const dataUpdated = createAction(STATIC_DATA.DATA_UPDATED);
