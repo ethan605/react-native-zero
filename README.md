@@ -13,17 +13,23 @@ You might get familiar with some other boilerplate tools out there, and this pro
 
 These are 3rd party packages that will also be integrated in your newly created project:
 
-* `lodash` (`^4.17.4`)
-* `react` (`~15.4.0`)
-* `react-native` (`0.41.2`)
-* `react-native-button` (`^1.8.2`)
-* `react-native-code-push` (`^1.17.0-beta`)
-* `react-native-device-info` (`^0.9.9`)
-* `react-native-router-flux` (`^3.37.0`)
-* `react-native-vector-icons` (`^4.0.0`)
-* `react-redux` (`^5.0.2`)
-* `redux` (`^3.6.0`)
-* `singleton` (`^1.0.0`)
+* [lodash](https://lodash.com/)
+* [moment](http://momentjs.com/)
+* [react-native-button](https://github.com/ide/react-native-button)
+* [react-native-code-push](http://microsoft.github.io/code-push/)
+* [react-native-device-info](https://github.com/rebeccahughes/react-native-device-info)
+* [react-native-fcm](https://github.com/evollu/react-native-fcm)
+* [react-native-joi](https://github.com/GoldenOwlAsia/react-native-joi)
+* [react-native-router-flux](https://github.com/aksonov/react-native-router-flux)
+* [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)
+* [react-redux](https://github.com/reactjs/react-redux)
+* [redux](http://redux.js.org/)
+* [redux-actions](https://github.com/acdlite/redux-actions)
+* [redux-axios-middleware](https://github.com/svrcekmichal/redux-axios-middleware)
+* [redux-persist](https://github.com/rt2zz/redux-persist)
+* [redux-reset](https://github.com/wwayne/redux-reset)
+* [redux-thunk](https://github.com/gaearon/redux-thunk)
+* [singleton](https://github.com/wlaurance/singleton)
 
 Besides that, to conform AirBnb's [**JavaScript & React style guides**](https://github.com/airbnb/javascript/tree/master/), all neccessary rules are configured in `.eslintrc.json`. You can use this with whatever ESLint tools (like `SublimeLinter` for Sublime Text or `ESLint` for Visual Studio Code,...) to highlight invalid syntaxes in your codebase.
 
@@ -176,3 +182,9 @@ Notes that you can run this task with `--dry` flag to test whether the informati
 ```shell
 npm run codepush-release -- --dry
 ```
+
+## TODOs
+
+### Features
+
+* [ ] Firebase & `react-native-fcm`

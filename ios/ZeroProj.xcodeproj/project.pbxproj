@@ -35,6 +35,7 @@
 		DD86688A78CD47D0A147C0DB /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 98BE0940B02E4A6690B6E4E9 /* libz.tbd */; };
 		DE793397B85440578015FFF7 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FB0E3D4162D42E18593CC8D /* Zocial.ttf */; };
 		FCA4E31AE7F54CD992AB17A7 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DA0728C83C649FD93E2430C /* MaterialIcons.ttf */; };
+		F1FD91BC9F35470EA0630F7B /* libRNFIRMessaging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB53641E128483CB911800D /* libRNFIRMessaging.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -273,6 +274,8 @@
 		D22F3DD3DECD47B79186E8F9 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		D270101D46194C0AA44BCF7A /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		D692957246984C5AA95411AB /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		8B2B6065E71E48D18C967F34 /* RNFIRMessaging.xcodeproj */ = {isa = PBXFileReference; name = "RNFIRMessaging.xcodeproj"; path = "../node_modules/react-native-fcm/ios/RNFIRMessaging.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		3CB53641E128483CB911800D /* libRNFIRMessaging.a */ = {isa = PBXFileReference; name = "libRNFIRMessaging.a"; path = "libRNFIRMessaging.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +298,7 @@
 				DD86688A78CD47D0A147C0DB /* libz.tbd in Frameworks */,
 				313942DD70F743FD9577304C /* libRNDeviceInfo.a in Frameworks */,
 				A928DA82FC75468DB66F9056 /* libRNVectorIcons.a in Frameworks */,
+				F1FD91BC9F35470EA0630F7B /* libRNFIRMessaging.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +453,7 @@
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				2CD6AF140F6949CEA29D065B /* RNDeviceInfo.xcodeproj */,
 				D270101D46194C0AA44BCF7A /* RNVectorIcons.xcodeproj */,
+				8B2B6065E71E48D18C967F34 /* RNFIRMessaging.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -890,6 +895,7 @@
 					"\"$(SRCROOT)/ZeroProj\"",
 					"\"$(SRCROOT)/ZeroProj$(PRODUCT_NAME_SUFFIX)\"",
 					"\"$(SRCROOT)/ZeroProj$(PRODUCT_NAME_SUFFIX)\"",
+					"\"$(SRCROOT)/ZeroProj$(PRODUCT_NAME_SUFFIX)\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -912,6 +918,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ZeroProj\"",
+					"\"$(SRCROOT)/ZeroProj$(PRODUCT_NAME_SUFFIX)\"",
 					"\"$(SRCROOT)/ZeroProj$(PRODUCT_NAME_SUFFIX)\"",
 					"\"$(SRCROOT)/ZeroProj$(PRODUCT_NAME_SUFFIX)\"",
 				);
@@ -1068,6 +1075,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ZeroProj\"",
+					"\"$(SRCROOT)/ZeroProj$(PRODUCT_NAME_SUFFIX)\"",
 					"\"$(SRCROOT)/ZeroProj$(PRODUCT_NAME_SUFFIX)\"",
 					"\"$(SRCROOT)/ZeroProj$(PRODUCT_NAME_SUFFIX)\"",
 				);
