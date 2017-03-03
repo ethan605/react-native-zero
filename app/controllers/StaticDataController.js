@@ -1,5 +1,5 @@
 /**
- * @providesModule ZeroProj.Controllers.StaticDataAdapter
+ * @providesModule ZeroProj.Controllers.StaticDataController
  */
 
 import React from 'react';
@@ -19,7 +19,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-class StaticDataAdapter extends React.PureComponent {
+class StaticDataController extends React.PureComponent {
   static propTypes = {
     // Define data validations here
   };
@@ -63,4 +63,4 @@ class StaticDataAdapter extends React.PureComponent {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StaticDataAdapter);
+export default connect(mapStateToProps, mapDispatchToProps)(StaticDataController);

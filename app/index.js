@@ -13,7 +13,7 @@ import AppExperimentals from './components/AppExperimentals';
 import AppRouter from './components/AppRouter';
 
 // Controllers
-import StaticDataAdapter from './controllers/StaticDataAdapter';
+import StaticDataController from './controllers/StaticDataController';
 
 // Constants
 import { FEATURES } from 'app/constants/Flags';
@@ -38,7 +38,7 @@ class App extends React.PureComponent {
       <Provider store={store}>
         <View style={styles.container}>
           <StatusBar backgroundColor={'transparent'} translucent barStyle={'light-content'} />
-          <StaticDataAdapter />
+          <StaticDataController />
           <AppCore />
         </View>
       </Provider>

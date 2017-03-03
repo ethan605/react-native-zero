@@ -17,6 +17,7 @@
 		"zero": "gulp zero:setup; gulp zero:apply"
 	},
 	"dependencies": {
+		"axios": "^0.15.3",
 		"lodash": "^4.17.4",
 		"react": "~15.4.0",
 		"react-native": "0.41.2",
@@ -27,6 +28,10 @@
 		"react-native-vector-icons": "^4.0.0",
 		"react-redux": "^5.0.2",
 		"redux": "^3.6.0",
+		"redux-actions": "^1.2.2",
+		"redux-axios-middleware": "^3.1.2",
+		"redux-persist": "^4.4.2",
+		"redux-thunk": "^2.2.0",
 		"singleton": "^1.0.0"
 	},
 	"devDependencies": {
