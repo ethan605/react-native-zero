@@ -24,6 +24,7 @@
 		"react-native-button": "^1.8.2",
 		"react-native-code-push": "^1.17.0-beta",
 		"react-native-device-info": "^0.9.9",
+		"react-native-joi": "^0.0.5",
 		"react-native-router-flux": "^3.37.0",
 		"react-native-vector-icons": "^4.0.0",
 		"react-redux": "^5.0.2",
@@ -31,6 +32,7 @@
 		"redux-actions": "^1.2.2",
 		"redux-axios-middleware": "^3.1.2",
 		"redux-persist": "^4.4.2",
+		"redux-reset": "^0.3.0",
 		"redux-thunk": "^2.2.0",
 		"singleton": "^1.0.0"
 	},
