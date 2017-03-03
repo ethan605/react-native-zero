@@ -28,9 +28,9 @@
 		3B373CEB1E695C1F00D44AB7 /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B373CE51E695C1F00D44AB7 /* FirebaseMessaging.framework */; };
 		3B373CEC1E695C1F00D44AB7 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B373CE61E695C1F00D44AB7 /* GoogleToolboxForMac.framework */; };
 		3B373CED1E695C1F00D44AB7 /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B373CE71E695C1F00D44AB7 /* Protobuf.framework */; };
-		3B373D021E695D7D00D44AB7 /* GoogleService-Info.dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B373CFF1E695D7D00D44AB7 /* GoogleService-Info.dev.plist */; };
-		3B373D031E695D7D00D44AB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B373D001E695D7D00D44AB7 /* GoogleService-Info.plist */; };
-		3B373D041E695D7D00D44AB7 /* GoogleService-Info.stg.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B373D011E695D7D00D44AB7 /* GoogleService-Info.stg.plist */; };
+		3B373D091E695E3D00D44AB7 /* GoogleService-Info.dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B373D061E695E3D00D44AB7 /* GoogleService-Info.dev.plist */; };
+		3B373D0A1E695E3D00D44AB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B373D071E695E3D00D44AB7 /* GoogleService-Info.plist */; };
+		3B373D0B1E695E3D00D44AB7 /* GoogleService-Info.stg.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B373D081E695E3D00D44AB7 /* GoogleService-Info.stg.plist */; };
 		5035EB4758B3488D90248A17 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 128768CC4D134C37B74772B5 /* MaterialCommunityIcons.ttf */; };
 		54DD347FA6F54135B14903E3 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5AC13EA531D74882981275B8 /* Ionicons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
@@ -281,9 +281,9 @@
 		3B373CE51E695C1F00D44AB7 /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseMessaging.framework; sourceTree = "<group>"; };
 		3B373CE61E695C1F00D44AB7 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = "<group>"; };
 		3B373CE71E695C1F00D44AB7 /* Protobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Protobuf.framework; sourceTree = "<group>"; };
-		3B373CFF1E695D7D00D44AB7 /* GoogleService-Info.dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.dev.plist"; sourceTree = "<group>"; };
-		3B373D001E695D7D00D44AB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		3B373D011E695D7D00D44AB7 /* GoogleService-Info.stg.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.stg.plist"; sourceTree = "<group>"; };
+		3B373D061E695E3D00D44AB7 /* GoogleService-Info.dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.dev.plist"; sourceTree = "<group>"; };
+		3B373D071E695E3D00D44AB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3B373D081E695E3D00D44AB7 /* GoogleService-Info.stg.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.stg.plist"; sourceTree = "<group>"; };
 		3CB53641E128483CB911800D /* libRNFIRMessaging.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFIRMessaging.a; sourceTree = "<group>"; };
 		3DA0728C83C649FD93E2430C /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		55F3C621A6BE4C97ABFBB1A8 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
@@ -402,7 +402,7 @@
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				3B373CFE1E695D7D00D44AB7 /* GoogleService-Info */,
+				3B373D051E695E3D00D44AB7 /* GoogleService-Info */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -448,14 +448,15 @@
 			path = Vendors;
 			sourceTree = "<group>";
 		};
-		3B373CFE1E695D7D00D44AB7 /* GoogleService-Info */ = {
+		3B373D051E695E3D00D44AB7 /* GoogleService-Info */ = {
 			isa = PBXGroup;
 			children = (
-				3B373CFF1E695D7D00D44AB7 /* GoogleService-Info.dev.plist */,
-				3B373D001E695D7D00D44AB7 /* GoogleService-Info.plist */,
-				3B373D011E695D7D00D44AB7 /* GoogleService-Info.stg.plist */,
+				3B373D061E695E3D00D44AB7 /* GoogleService-Info.dev.plist */,
+				3B373D071E695E3D00D44AB7 /* GoogleService-Info.plist */,
+				3B373D081E695E3D00D44AB7 /* GoogleService-Info.stg.plist */,
 			);
-			path = "GoogleService-Info";
+			name = "GoogleService-Info";
+			path = "ZeroProj/GoogleService-Info";
 			sourceTree = "<group>";
 		};
 		3BD0DD251E5AF68100CDDA5D /* Products */ = {
@@ -900,7 +901,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				3B373D021E695D7D00D44AB7 /* GoogleService-Info.dev.plist in Resources */,
+				3B373D091E695E3D00D44AB7 /* GoogleService-Info.dev.plist in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				C4F628CA42C0421A81E36300 /* Entypo.ttf in Resources */,
 				AAE2644B323A4081B1B02FD3 /* EvilIcons.ttf in Resources */,
@@ -912,8 +913,8 @@
 				D2FCA29C39DD4B7E9859F8AF /* Octicons.ttf in Resources */,
 				D69B9DD003344DFDBBDC4A53 /* SimpleLineIcons.ttf in Resources */,
 				DE793397B85440578015FFF7 /* Zocial.ttf in Resources */,
-				3B373D031E695D7D00D44AB7 /* GoogleService-Info.plist in Resources */,
-				3B373D041E695D7D00D44AB7 /* GoogleService-Info.stg.plist in Resources */,
+				3B373D0A1E695E3D00D44AB7 /* GoogleService-Info.plist in Resources */,
+				3B373D0B1E695E3D00D44AB7 /* GoogleService-Info.stg.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
