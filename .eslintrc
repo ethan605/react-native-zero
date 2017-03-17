@@ -279,6 +279,7 @@
     "react/require-render-return": "error",
     "react/sort-comp": "error",
     "react/no-is-mounted": "error",
-    "react/jsx-uses-vars": "error"
+    "react/jsx-uses-vars": "error",
+    "react/jsx-no-undef": "error"
   }
 }
