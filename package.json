@@ -14,7 +14,9 @@
 		"ios-staging": "echo 'Run from Xcode instead'",
 		"codepush-check": "code-push deployment history ZeroProj",
 		"codepush-release": "gulp codepush:release",
-		"zero": "gulp zero:setup; gulp zero:apply"
+		"zero": "gulp zero:setup; gulp zero:apply",
+		"gen-debug-keyhash": "keytool -exportcert -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey | openssl sha1 -binary | openssl base64",
+		"gen-release-keyhash": "keytool -exportcert -list -v -keystore ./android/app/zeroproj-release-key.keystore -alias zeroproj-release-key-alias | openssl sha1 -binary | openssl base64"
 	},
 	"dependencies": {
 		"axios": "^0.15.3",
